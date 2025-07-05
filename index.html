@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScioNos - L'Intelligence Artificielle Open-Source Accessible à Tous</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .discord-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #7289da, #5865f2);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(114, 137, 218, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discord-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .discord-button:hover::before {
+            left: 100%;
+        }
+
+        .discord-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(114, 137, 218, 0.5);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #4ecdc4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        /* Model Cards */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .model-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            transition: all 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .model-card:hover::before {
+            top: -60%;
+            left: -60%;
+        }
+
+        .model-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .model-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .model-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4ecdc4;
+        }
+
+        .model-details {
+            position: relative;
+            z-index: 2;
+        }
+
+        .model-spec {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .model-spec:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #4ecdc4;
+        }
+
+        .spec-value {
+            color: #e0e0e0;
+        }
+
+        /* Tables */
+        .table-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #4ecdc4;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .feature-yes {
+            color: #4ecdc4;
+            font-weight: 600;
+        }
+
+        .feature-no {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .use-case {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .use-case:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+        }
+
+        .use-case-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #4ecdc4;
+        }
+
+        .use-case-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .use-case-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Why ScioNos */
+        .why-scionos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .why-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .why-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+        }
+
+        .why-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #4ecdc4;
+        }
+
+        .why-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-link {
+            color: #4ecdc4;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #ff6b6b;
+            transform: translateY(-2px);
+        }
+
+        .footer-date {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>🚀 ScioNos</h1>
+                <p class="header-subtitle">L'Intelligence Artificielle Open-Source Accessible à Tous</p>
+                <a href="https://discord.gg/cPs2pMR8nz" class="discord-button">
+                    💬 Rejoignez notre communauté Discord !
+                </a>
+                <p style="margin-top: 20px; opacity: 0.8;">Échangez - Apprenez - Partagez - Créez</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modèles Open Source -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">🌟 Modèles Open Source</h2>
+            
+            <div class="table-container">
+                <div class="table-title">📊 Comparatif des Modèles Open Source</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Modèle</th>
+                            <th>Appel de fonction</th>
+                            <th>Vision</th>
+                            <th>Réflexion</th>
+                            <th>Contexte (Tokens)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>DeepSeek-V3-0324</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-no">❌ Non</td>
+                            <td class="feature-no">❌ Non</td>
+                            <td>164K</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DeepSeek-R1-0528</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-no">❌ Non</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td>164K</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Llama-4-Scout-17B-16E-1M</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td>1 Million</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Llama-4-Maverick-17B-128E-1M</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td>1 Million</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="models-grid">
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">🔮</div>
+                        <div class="model-title">DeepSeek-R1-0528</div>
+                    </div>
+                    <div class="model-details">
+                        <div class="model-spec">
+                            <span class="spec-label">Paramètres:</span>
+                            <span class="spec-value">685 milliards</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">Spécialité:</span>
+                            <span class="spec-value">Raisonnement avancé</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">Créateur:</span>
+                            <span class="spec-value">DeepSeek</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">Licence:</span>
+                            <span class="spec-value">MIT License</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">🦙</div>
+                        <div class="model-title">Llama-4-Maverick</div>
+                    </div>
+                    <div class="model-details">
+                        <div class="model-spec">
+                            <span class="spec-label">Paramètres:</span>
+                            <span class="spec-value">17B actifs / 400B total</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">Spécialité:</span>
+                            <span class="spec-value">Multimodalité</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">Créateur:</span>
+                            <span class="spec-value">Meta</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">Contexte:</span>
+                            <span class="spec-value">1 Million tokens</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modèles Propriétaires -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">🔒 Modèles Propriétaires</h2>
+            
+            <div class="table-container">
+                <div class="table-title">📊 Comparatif des Modèles Propriétaires</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Modèle</th>
+                            <th>Appel de fonction</th>
+                            <th>Vision</th>
+                            <th>Réflexion</th>
+                            <th>Contexte (Tokens)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GPT-4.1</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-no">❌ Non</td>
+                            <td>1 Million</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GPT-4.1-Mini</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-no">❌ Non</td>
+                            <td>1 Million</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GPT-4.1-Nano</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-no">❌ Non</td>
+                            <td>1 Million</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GPT-4o</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-no">❌ Non</td>
+                            <td>128K</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GPT-4o-Mini</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-no">❌ Non</td>
+                            <td>128K</td>
+                        </tr>
+                        <tr>
+                            <td><strong>O3</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td>200K</td>
+                        </tr>
+                        <tr>
+                            <td><strong>O3-Mini</strong></td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td class="feature-yes">✅ Oui</td>
+                            <td>200K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Supplémentaires -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">🛠️ Services Supplémentaires</h2>
+            
+            <div class="models-grid">
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">🔗</div>
+                        <div class="model-title">Embedding</div>
+                    </div>
+                    <div class="model-details">
+                        <div class="model-spec">
+                            <span class="spec-label">text-embedding-3-large</span>
+                            <span class="spec-value">✅</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">text-embedding-3-small</span>
+                            <span class="spec-value">✅</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">text-embedding-ada-002</span>
+                            <span class="spec-value">✅</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <div class="model-header">
+                        <div class="model-icon">🎵</div>
+                        <div class="model-title">Text-to-Speech</div>
+                    </div>
+                    <div class="model-details">
+                        <div class="model-spec">
+                            <span class="spec-label">tts-1-hd</span>
+                            <span class="spec-value">✅ Haute qualité</span>
+                        </div>
+                        <div class="model-spec">
+                            <span class="spec-label">tts-1</span>
+                            <span class="spec-value">✅ Standard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cas d'Usage -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">🛠️ Cas d'Usage Transformatifs</h2>
+            
+            <div class="use-cases">
+                <div class="use-case">
+                    <div class="use-case-icon">🏢</div>
+                    <h3 class="use-case-title">Business</h3>
+                    <p class="use-case-description">Automatisation intelligente des workflows, analyse prédictive et insights décisionnels, optimisation des processus d'entreprise</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">📝</div>
+                    <h3 class="use-case-title">Création</h3>
+                    <p class="use-case-description">Production multi-format et multilingue, adaptation contextuelle et stylisée, génération de contenus spécialisés</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">🔬</div>
+                    <h3 class="use-case-title">Recherche</h3>
+                    <p class="use-case-description">Accélération de la découverte scientifique, modélisation de systèmes complexes, synthèse automatique de connaissances</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">🌐</div>
+                    <h3 class="use-case-title">Web & Applications</h3>
+                    <p class="use-case-description">Interfaces conversationnelles sur mesure, recommandations dynamiques personnalisées, expériences utilisateur adaptatives</p>
+                </div>
+
+                <div class="use-case">
+                    <div class="use-case-icon">💻</div>
+                    <h3 class="use-case-title">Développement</h3>
+                    <p class="use-case-description">Résolution automatique d'issues GitHub, génération et correction de code, tests unitaires automatisés, analyse de repositories entiers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pourquoi ScioNos -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">💡 Pourquoi ScioNos?</h2>
+            <p class="section-subtitle">Notre approche en 3D:</p>
+            
+            <div class="why-scionos">
+                <div class="why-item">
+                    <h3 class="why-title">🌍 Démocratisation</h3>
+                    <p class="why-description">L'IA accessible à tous, sans barrières techniques ou financières. Nous croyons que l'intelligence artificielle doit être un outil ouvert et démocratique.</p>
+                </div>
+
+                <div class="why-item">
+                    <h3 class="why-title">🎯 Diversité</h3>
+                    <p class="why-description">Une sélection variée de modèles experts, chacun optimisé pour des cas d'usage spécifiques. De la création à l'analyse, nous couvrons tous vos besoins.</p>
+                </div>
+
+                <div class="why-item">
+                    <h3 class="why-title">🚀 Développement</h3>
+                    <p class="why-description">Une communauté pour grandir ensemble, partager les connaissances et construire l'avenir de l'IA collaborative.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Utilisation Responsable -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">⚠️ Utilisation Responsable</h2>
+            
+            <div class="table-container">
+                <p style="text-align: center; margin-bottom: 30px; font-size: 1.2rem;">
+                    Chez <strong>ScioNos</strong>, nous défendons une IA <strong>éthique et accessible</strong>:
+                </p>
+                
+                <div class="why-scionos">
+                    <div class="why-item">
+                        <h3 class="why-title">🔓 Liberté</h3>
+                        <p class="why-description">Modèles open-source libres d'utilisation, sous votre responsabilité</p>
+                    </div>
+
+                    <div class="why-item">
+                        <h3 class="why-title">⚖️ Légalité</h3>
+                        <p class="why-description">Respect des cadres légaux et approche transparente</p>
+                    </div>
+
+                    <div class="why-item">
+                        <h3 class="why-title">🤝 Éthique</h3>
+                        <p class="why-description">Engagement collectif pour une IA bénéfique et respectueuse</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="https://discord.gg/cPs2pMR8nz" class="footer-link">Discord</a>
+                <a href="https://scionos.ch" class="footer-link">Site Web</a>
+                <a href="#" class="footer-link">Blog</a>
+            </div>
+            <p class="footer-date">📅 Mis à jour le 5 juillet 2025</p>
+        </div>
+    </footer>
+</body>
+</html>
