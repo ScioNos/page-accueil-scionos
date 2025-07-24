@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScioNos - L'Intelligence Artificielle Open-Source Accessible à Tous</title>
+    <title>ScioNos - Modèles Disponibles</title>
     <style>
         * {
             margin: 0;
@@ -13,10 +13,9 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 30%, #16213e 70%, #0f3460 100%);
+            background: #0f0f0f;
             color: #e8e8e8;
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         .container {
@@ -27,460 +26,215 @@
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-            animation: rotate 25s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
         }
 
         .header h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 25px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-            background: linear-gradient(45deg, #00f5ff, #ff006e, #8338ec, #3a86ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 300%;
-            animation: gradient-shift 4s ease-in-out infinite;
-        }
-
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: white;
         }
 
         .header-subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 35px;
-            opacity: 0.95;
-            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            opacity: 0.9;
+            color: rgba(255,255,255,0.8);
         }
 
-        .discord-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #5865f2, #7289da, #5865f2);
-            color: white;
-            padding: 18px 40px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.4);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-
-        .discord-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .discord-button:hover::before {
-            left: 100%;
-        }
-
-        .discord-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(88, 101, 242, 0.6);
-        }
-
-        /* Section Styles */
+        /* Section */
         .section {
-            padding: 100px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 60px 0;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 60px;
-            background: linear-gradient(45deg, #00f5ff, #ff006e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-weight: 800;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.3rem;
-            margin-bottom: 50px;
-            opacity: 0.85;
-            color: #b8b8b8;
-        }
-
-        /* Model Cards */
-        .models-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 35px;
-            margin-bottom: 60px;
-        }
-
-        .model-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 25px;
-            padding: 35px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.15);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .model-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-            transition: all 0.4s ease;
-        }
-
-        .model-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 35px 70px rgba(0,0,0,0.5);
-        }
-
-        .model-card:hover::before {
-            top: -60%;
-            left: -60%;
-        }
-
-        .model-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .model-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #00f5ff, #ff006e);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            font-size: 1.8rem;
-            color: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        .model-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: white;
-        }
-
-        .model-details {
-            position: relative;
-            z-index: 2;
-        }
-
-        .model-spec {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .model-spec:last-child {
-            border-bottom: none;
-        }
-
-        .spec-label {
-            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 30px;
             color: #00f5ff;
-        }
-
-        .spec-value {
-            color: #f0f0f0;
-            font-weight: 600;
+            font-weight: 700;
+            text-align: center;
         }
 
         /* Tables */
         .table-container {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 50px;
-            overflow-x: auto;
+            background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            overflow-x: auto;
         }
 
         .table-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 25px;
-            background: linear-gradient(45deg, #00f5ff, #ff006e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #00f5ff;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
         }
 
         th, td {
-            padding: 15px;
+            padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: #00f5ff;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            color: #e8e8e8;
         }
 
         tr:hover {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .model-name {
+            font-weight: 600;
+            color: white;
         }
 
         .feature-yes {
-            color: #00f5ff;
-            font-weight: 700;
+            color: #4ade80;
+            font-weight: 600;
         }
 
         .feature-no {
-            color: #ff006e;
+            color: #f87171;
+            font-weight: 600;
+        }
+
+        /* Highlight Free Models */
+        .free-model {
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .free-model .model-name {
+            color: #4ade80;
+        }
+
+        /* Access Types */
+        .access-info {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .access-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 12px;
+            padding: 25px 40px;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .access-card h3 {
+            color: #00f5ff;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
-        /* Free Models Section */
-        .free-models {
-            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-            border-radius: 25px;
-            padding: 40px;
-            margin-bottom: 50px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        .access-card p {
+            color: #e8e8e8;
+            font-size: 1.05rem;
+            line-height: 1.5;
         }
 
-        .free-models h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
+        .free-tag {
+            background: #059669;
             color: white;
-            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
         }
 
-        .free-models p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: rgba(255,255,255,0.9);
-        }
-
-        /* Use Cases */
-        .use-cases {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 35px;
-        }
-
-        .use-case {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .use-case:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-        }
-
-        .use-case-icon {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            color: #00f5ff;
-        }
-
-        .use-case-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 18px;
+        .premium-tag {
+            background: #7c3aed;
             color: white;
-        }
-
-        .use-case-description {
-            opacity: 0.9;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.85);
-        }
-
-        /* Why ScioNos */
-        .why-scionos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-        }
-
-        .why-item {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            padding: 45px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .why-item:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-        }
-
-        .why-title {
-            font-size: 1.7rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: #00f5ff;
-        }
-
-        .why-description {
-            opacity: 0.9;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.85);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
         }
 
         /* Footer */
         .footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px 0;
+            background: rgba(255,255,255,0.02);
+            padding: 30px 0;
             text-align: center;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            margin-bottom: 35px;
-        }
-
-        .footer-link {
-            color: #00f5ff;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: #ff006e;
-            transform: translateY(-3px);
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .footer-date {
-            opacity: 0.8;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.8);
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .service-card h4 {
+            color: #00f5ff;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .service-item span:first-child {
+            color: #b8b8b8;
+        }
+
+        .service-item span:last-child {
+            color: #4ade80;
+            font-weight: 600;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 3rem;
-            }
-            
-            .header-subtitle {
-                font-size: 1.2rem;
+                font-size: 2rem;
             }
             
             .section-title {
-                font-size: 2.5rem;
+                font-size: 1.6rem;
             }
             
-            .models-grid {
+            .access-info {
                 grid-template-columns: 1fr;
             }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fadeInUp {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
         }
     </style>
 </head>
@@ -488,53 +242,53 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="header-content">
-                <h1>🚀 ScioNos</h1>
-                <p class="header-subtitle">L'Intelligence Artificielle Open-Source Accessible à Tous</p>
-                <a href="https://discord.gg/cPs2pMR8nz" class="discord-button" target="_top">
-                    💬 Rejoignez notre communauté Discord !
-                </a>
-                <p style="margin-top: 25px; opacity: 0.9; font-size: 1.1rem;">Échangez - Apprenez - Partagez - Créez</p>
-            </div>
+            <h1>🚀 ScioNos</h1>
+            <p class="header-subtitle">Modèles IA Disponibles</p>
         </div>
     </header>
 
-    <!-- Modèles Totalement Gratuits -->
+    <!-- Access Information -->
+    <section class="section">
+        <div class="container">
+            <div class="access-info">
+                <div class="access-card">
+                    <h3>💰 Crédit $10/mois</h3>
+                    <p>Modèles Open-Source • Modèles OpenAI • Augmentation sur demande</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Models -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">🆓 Modèles Totalement Gratuits</h2>
             
-            <div class="free-models">
-                <h3>💸 $0 - Accès Illimité !</h3>
-                <p>Ces modèles sont hébergés sur nos anciens GPU et totalement gratuits, sans crédit nécessaire !</p>
-            </div>
-
             <div class="table-container">
-                <div class="table-title">📊 Modèles Gratuits Disponibles</div>
                 <table>
                     <thead>
                         <tr>
                             <th>Modèle</th>
-                            <th>Appel de fonction</th>
+                            <th>Fonctions</th>
                             <th>Vision</th>
                             <th>Réflexion</th>
-                            <th>Contexte (Tokens)</th>
+                            <th>Contexte</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><strong>DeepSeek-R1-0528-free</strong></td>
+                        <tr class="free-model">
+                            <td class="model-name">DeepSeek-R1-0528-free</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
                             <td class="feature-yes">✅ Oui</td>
-                            <td>164K</td>
+                            <td>164K tokens</td>
                         </tr>
-                        <tr>
-                            <td><strong>DeepSeek-V3-0324-free</strong></td>
+                        <tr class="free-model">
+                            <td class="model-name">DeepSeek-V3-0324-free</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
                             <td class="feature-no">❌ Non</td>
-                            <td>164K</td>
+                            <td>164K tokens</td>
                         </tr>
                     </tbody>
                 </table>
@@ -542,235 +296,145 @@
         </div>
     </section>
 
-    <!-- Modèles Open Source -->
+    <!-- Open Source Models -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">🌟 Modèles Open Source</h2>
-            <p class="section-subtitle">Utilisez votre crédit de $10/mois</p>
             
             <div class="table-container">
-                <div class="table-title">📊 Comparatif des Modèles Open Source</div>
+                <div class="table-title">Crédit $10/mois - GPU B200</div>
                 <table>
                     <thead>
                         <tr>
                             <th>Modèle</th>
-                            <th>Appel de fonction</th>
+                            <th>Fonctions</th>
                             <th>Vision</th>
                             <th>Réflexion</th>
-                            <th>Contexte (Tokens)</th>
+                            <th>Contexte</th>
+                            <th>Spécialité</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>DeepSeek-V3-0324</strong></td>
+                            <td class="model-name">DeepSeek-V3-0324</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
                             <td class="feature-no">❌ Non</td>
-                            <td>164K</td>
+                            <td>164K tokens</td>
+                            <td>Performance générale</td>
                         </tr>
                         <tr>
-                            <td><strong>DeepSeek-R1-0528</strong></td>
+                            <td class="model-name">DeepSeek-R1-0528</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
                             <td class="feature-yes">✅ Oui</td>
-                            <td>164K</td>
+                            <td>164K tokens</td>
+                            <td>Raisonnement avancé</td>
                         </tr>
                         <tr>
-                            <td><strong>Llama-4-Scout-17B-16E-1M</strong></td>
+                            <td class="model-name">Llama-4-Scout-17B-16E-1M</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
-                            <td>1 Million</td>
+                            <td>1M tokens</td>
+                            <td>Multimodal + Contexte long</td>
                         </tr>
                         <tr>
-                            <td><strong>Llama-4-Maverick-17B-128E-1M</strong></td>
+                            <td class="model-name">Llama-4-Maverick-17B-128E-1M</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
-                            <td>1 Million</td>
+                            <td>1M tokens</td>
+                            <td>Multimodal + Contexte long</td>
                         </tr>
                         <tr>
-                            <td><strong>moonshotai/Kimi-K2-Instruct</strong></td>
+                            <td class="model-name">moonshotai/Kimi-K2-Instruct</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
                             <td class="feature-no">❌ Non</td>
-                            <td>128K</td>
+                            <td>128K tokens</td>
+                            <td>Agents & Outils</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
-            <div class="models-grid">
-                <div class="model-card">
-                    <div class="model-header">
-                        <div class="model-icon">🔮</div>
-                        <div class="model-title">DeepSeek-R1-0528</div>
-                    </div>
-                    <div class="model-details">
-                        <div class="model-spec">
-                            <span class="spec-label">Paramètres:</span>
-                            <span class="spec-value">685 milliards</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Spécialité:</span>
-                            <span class="spec-value">Raisonnement avancé</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Créateur:</span>
-                            <span class="spec-value">DeepSeek</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Licence:</span>
-                            <span class="spec-value">MIT License</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="model-card">
-                    <div class="model-header">
-                        <div class="model-icon">🦙</div>
-                        <div class="model-title">Llama-4-Maverick</div>
-                    </div>
-                    <div class="model-details">
-                        <div class="model-spec">
-                            <span class="spec-label">Paramètres:</span>
-                            <span class="spec-value">17B actifs / 400B total</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Spécialité:</span>
-                            <span class="spec-value">Multimodalité</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Créateur:</span>
-                            <span class="spec-value">Meta</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Contexte:</span>
-                            <span class="spec-value">1 Million tokens</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="model-card">
-                    <div class="model-header">
-                        <div class="model-icon">🌙</div>
-                        <div class="model-title">Kimi-K2-Instruct</div>
-                    </div>
-                    <div class="model-details">
-                        <div class="model-spec">
-                            <span class="spec-label">Paramètres:</span>
-                            <span class="spec-value">32B actifs / 1T total</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Spécialité:</span>
-                            <span class="spec-value">Agents & Outils</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Créateur:</span>
-                            <span class="spec-value">Moonshot AI</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Contexte:</span>
-                            <span class="spec-value">128K tokens</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="model-card">
-                    <div class="model-header">
-                        <div class="model-icon">🌊</div>
-                        <div class="model-title">DeepSeek-V3-0324</div>
-                    </div>
-                    <div class="model-details">
-                        <div class="model-spec">
-                            <span class="spec-label">Paramètres:</span>
-                            <span class="spec-value">671 milliards</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Spécialité:</span>
-                            <span class="spec-value">Performance générale</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Créateur:</span>
-                            <span class="spec-value">DeepSeek</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">Licence:</span>
-                            <span class="spec-value">MIT License</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Modèles Propriétaires -->
+    <!-- Proprietary Models -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">🔒 Modèles Propriétaires</h2>
-            <p class="section-subtitle">Contactez-nous en MP pour accès</p>
             
             <div class="table-container">
-                <div class="table-title">📊 Comparatif des Modèles Propriétaires</div>
+                <div class="table-title">Sur demande - Contactez-nous</div>
                 <table>
                     <thead>
                         <tr>
                             <th>Modèle</th>
-                            <th>Appel de fonction</th>
+                            <th>Fonctions</th>
                             <th>Vision</th>
                             <th>Réflexion</th>
-                            <th>Contexte (Tokens)</th>
+                            <th>Contexte</th>
+                            <th>Créateur</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>GPT-4.1</strong></td>
+                            <td class="model-name">GPT-4.1 <span class="premium-tag">PREMIUM</span></td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
-                            <td>1 Million</td>
+                            <td>1M tokens</td>
+                            <td>OpenAI</td>
                         </tr>
                         <tr>
-                            <td><strong>GPT-4.1-Mini</strong></td>
+                            <td class="model-name">GPT-4.1-Mini <span class="premium-tag">PREMIUM</span></td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
-                            <td>1 Million</td>
+                            <td>1M tokens</td>
+                            <td>OpenAI</td>
                         </tr>
                         <tr>
-                            <td><strong>GPT-4.1-Nano</strong></td>
+                            <td class="model-name">GPT-4.1-Nano <span class="premium-tag">PREMIUM</span></td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
-                            <td>1 Million</td>
+                            <td>1M tokens</td>
+                            <td>OpenAI</td>
                         </tr>
                         <tr>
-                            <td><strong>GPT-4o</strong></td>
+                            <td class="model-name">GPT-4o <span class="premium-tag">PREMIUM</span></td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
-                            <td>128K</td>
+                            <td>128K tokens</td>
+                            <td>OpenAI</td>
                         </tr>
                         <tr>
-                            <td><strong>GPT-4o-Mini</strong></td>
+                            <td class="model-name">GPT-4o-Mini <span class="premium-tag">PREMIUM</span></td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-no">❌ Non</td>
-                            <td>128K</td>
+                            <td>128K tokens</td>
+                            <td>OpenAI</td>
                         </tr>
                         <tr>
-                            <td><strong>O3</strong></td>
+                            <td class="model-name">O3 <span class="premium-tag">PREMIUM</span></td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
-                            <td>200K</td>
+                            <td>200K tokens</td>
+                            <td>OpenAI</td>
                         </tr>
                         <tr>
-                            <td><strong>O3-Mini</strong></td>
+                            <td class="model-name">O3-Mini <span class="premium-tag">PREMIUM</span></td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
                             <td class="feature-yes">✅ Oui</td>
-                            <td>200K</td>
+                            <td>200K tokens</td>
+                            <td>OpenAI</td>
                         </tr>
                     </tbody>
                 </table>
@@ -778,152 +442,37 @@
         </div>
     </section>
 
-    <!-- Services Supplémentaires -->
+    <!-- Additional Services -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">🛠️ Services Supplémentaires</h2>
             
-            <div class="models-grid">
-                <div class="model-card">
-                    <div class="model-header">
-                        <div class="model-icon">🔗</div>
-                        <div class="model-title">Embedding</div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4>🔗 Embedding Models</h4>
+                    <div class="service-item">
+                        <span>text-embedding-3-large</span>
+                        <span>✅ Disponible</span>
                     </div>
-                    <div class="model-details">
-                        <div class="model-spec">
-                            <span class="spec-label">text-embedding-3-large</span>
-                            <span class="spec-value">✅</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">text-embedding-3-small</span>
-                            <span class="spec-value">✅</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">text-embedding-ada-002</span>
-                            <span class="spec-value">✅</span>
-                        </div>
+                    <div class="service-item">
+                        <span>text-embedding-3-small</span>
+                        <span>✅ Disponible</span>
+                    </div>
+                    <div class="service-item">
+                        <span>text-embedding-ada-002</span>
+                        <span>✅ Disponible</span>
                     </div>
                 </div>
 
-                <div class="model-card">
-                    <div class="model-header">
-                        <div class="model-icon">🎵</div>
-                        <div class="model-title">Text-to-Speech</div>
+                <div class="service-card">
+                    <h4>🎵 Text-to-Speech</h4>
+                    <div class="service-item">
+                        <span>tts-1-hd</span>
+                        <span>✅ Haute qualité</span>
                     </div>
-                    <div class="model-details">
-                        <div class="model-spec">
-                            <span class="spec-label">tts-1-hd</span>
-                            <span class="spec-value">✅ Haute qualité</span>
-                        </div>
-                        <div class="model-spec">
-                            <span class="spec-label">tts-1</span>
-                            <span class="spec-value">✅ Standard</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cas d'Usage -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">🛠️ Cas d'Usage Transformatifs</h2>
-            
-            <div class="use-cases">
-                <div class="use-case">
-                    <div class="use-case-icon">🏢</div>
-                    <h3 class="use-case-title">Business</h3>
-                    <p class="use-case-description">Automatisation intelligente des workflows, analyse prédictive et insights décisionnels, optimisation des processus d'entreprise</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">📝</div>
-                    <h3 class="use-case-title">Création</h3>
-                    <p class="use-case-description">Production multi-format et multilingue, adaptation contextuelle et stylisée, génération de contenus spécialisés</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">🔬</div>
-                    <h3 class="use-case-title">Recherche</h3>
-                    <p class="use-case-description">Accélération de la découverte scientifique, modélisation de systèmes complexes, synthèse automatique de connaissances</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">🌐</div>
-                    <h3 class="use-case-title">Web & Applications</h3>
-                    <p class="use-case-description">Interfaces conversationnelles sur mesure, recommandations dynamiques personnalisées, expériences utilisateur adaptatives</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">💻</div>
-                    <h3 class="use-case-title">Développement</h3>
-                    <p class="use-case-description">Résolution automatique d'issues GitHub, génération et correction de code, tests unitaires automatisés, analyse de repositories entiers</p>
-                </div>
-
-                <div class="use-case">
-                    <div class="use-case-icon">🤖</div>
-                    <h3 class="use-case-title">Agents Autonomes</h3>
-                    <p class="use-case-description">Création d'agents intelligents avec Kimi-K2, intégration d'outils externes, automatisation de tâches complexes multi-étapes</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pourquoi ScioNos -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">💡 Pourquoi ScioNos?</h2>
-            <p class="section-subtitle">Notre approche en 3D:</p>
-            
-            <div class="why-scionos">
-                <div class="why-item">
-                    <h3 class="why-title">🌍 Démocratisation</h3>
-                    <p class="why-description">L'IA accessible à tous, sans barrières techniques ou financières. Nous croyons que l'intelligence artificielle doit être un outil ouvert et démocratique.</p>
-                </div>
-
-                <div class="why-item">
-                    <h3 class="why-title">🎯 Diversité</h3>
-                    <p class="why-description">Une sélection variée de modèles experts, chacun optimisé pour des cas d'usage spécifiques. De la création à l'analyse, nous couvrons tous vos besoins.</p>
-                </div>
-
-                <div class="why-item">
-                    <h3 class="why-title">🚀 Développement</h3>
-                    <p class="why-description">Une communauté pour grandir ensemble, partager les connaissances et construire l'avenir de l'IA collaborative.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Utilisation Responsable -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">⚠️ Utilisation Responsable</h2>
-            
-            <div class="table-container">
-                <p style="text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
-                    Chez <strong>ScioNos</strong>, nous défendons une IA <strong>éthique et accessible</strong>:
-                </p>
-                
-                <div class="why-scionos">
-                    <div class="why-item">
-                        <h3 class="why-title">🔓 Liberté</h3>
-                        <p class="why-description">Modèles open-source libres d'utilisation, sous votre responsabilité</p>
-                    </div>
-
-                    <div class="why-item">
-                        <h3 class="why-title">⚖️ Légalité</h3>
-                        <p class="why-description">Respect des cadres légaux et approche transparente</p>
-                    </div>
-
-                    <div class="why-item">
-                        <h3 class="why-title">🤝 Éthique</h3>
-                        <p class="why-description">Engagement collectif pour une IA bénéfique et respectueuse</p>
-                    </div>
-
-                    <div class="why-item">
-                        <h3 class="why-title">🛡️ Sécurité</h3>
-                        <p class="why-description">Protection des données et confidentialité, infrastructure sécurisée</p>
+                    <div class="service-item">
+                        <span>tts-1</span>
+                        <span>✅ Standard</span>
                     </div>
                 </div>
             </div>
@@ -933,10 +482,6 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <a href="https://discord.gg/cPs2pMR8nz" class="footer-link" target="_top">Discord</a>
-                <a href="https://scionos.ch" class="footer-link" target="_top">Site Web</a>
-            </div>
             <p class="footer-date">📅 Mis à jour le 24 juillet 2025</p>
         </div>
     </footer>
