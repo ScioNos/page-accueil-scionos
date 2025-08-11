@@ -1,217 +1,150 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScioNos - Notice Settings</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ScioNos – Notice d’utilisation responsable</title>
+  <meta name="description" content="Notice d’utilisation responsable des modèles IA de ScioNos : règles d’éthique, responsabilité et bon usage." />
+  <meta property="og:title" content="ScioNos – Notice d’utilisation responsable" />
+  <meta property="og:description" content="Règles d’éthique, responsabilité et bon usage des modèles IA proposés par ScioNos." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scionos.github.io/page-accueil-scionos/announce.html" />
+  <meta name="theme-color" content="#00f5ff" />
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f0f0f;
-            color: #e8e8e8;
-            line-height: 1.6;
-            padding: 20px;
-        }
+  <!-- Police (optionnel, cohérence avec la page d’accueil) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --text: #e8e8e8;
+      --muted: #c8c8c8;
+      --indigo: #667eea;
+      --purple: #764ba2;
+      --cyan: #00f5ff;
+      --glass: rgba(255,255,255,0.04);
+      --glass-b: rgba(255,255,255,0.12);
+      --success: #4ade80;
+      --warning: #ffb86b; /* accent doux optionnel */
+    }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            text-align: center;
-            border-radius: 15px 15px 0 0;
-            border: 3px solid #ff6b35;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .header h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: white;
-        }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
 
-        .header-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 25px;
-        }
+    .container { max-width: 880px; margin: 0 auto; }
 
-        .discord-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #5865f2, #7289da, #5865f2);
-            color: white;
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            box-shadow: 0 15px 35px rgba(88, 101, 242, 0.5);
-            transition: all 0.4s ease;
-            border: 2px solid rgba(255,255,255,0.2);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--purple) 100%);
+      padding: 30px 24px;
+      text-align: center;
+      border-radius: 16px 16px 0 0;
+      border: 2px solid rgba(0,245,255,0.35);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    }
+    .header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: #fff; }
+    .header-subtitle { font-size: 1.05rem; color: rgba(255,255,255,0.9); margin-bottom: 18px; }
 
-        .discord-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(88, 101, 242, 0.7);
-            background: linear-gradient(45deg, #7289da, #5865f2, #7289da);
-        }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 1rem; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; border: 2px solid transparent; }
+    .btn-discord { background: linear-gradient(45deg, #5865f2, #7289da); color: #fff; border-color: rgba(255,255,255,0.2); box-shadow: 0 12px 28px rgba(88,101,242,0.45); }
+    .btn-discord:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 36px rgba(88,101,242,0.6); }
+    .btn-discord:focus { outline: 3px solid var(--cyan); outline-offset: 3px; }
 
-        /* Main Content */
-        .content {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 0 0 15px 15px;
-            padding: 40px;
-            border-top: none;
-        }
+    /* Top nav (retour) */
+    .top-nav { text-align: center; margin: 14px 0 0; }
+    .top-nav a { display: inline-block; padding: 8px 14px; border-radius: 999px; border:1px solid rgba(0,245,255,0.35); color: var(--cyan); text-decoration: none; }
+    .top-nav a:hover { background: rgba(0,245,255,0.12); }
+    .top-nav a:focus { outline: 3px solid var(--cyan); outline-offset: 2px; }
 
-        .warning-title {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.5rem;
-            font-weight: 800;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-        }
+    /* Contenu */
+    .content { background: var(--glass); border: 1px solid var(--glass-b); border-top: none; border-radius: 0 0 16px 16px; padding: 32px 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); }
 
-        .notice-box {
-            background: rgba(102, 126, 234, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
+    .warning-title { background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(102,126,234,0.20)); color: var(--text); padding: 16px; border-radius: 12px; text-align: center; margin-bottom: 24px; font-size: 1.35rem; font-weight: 800; border:1px solid rgba(0,245,255,0.35); }
 
-        .company-intro {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            text-align: center;
-            color: #e8e8e8;
-        }
+    .notice-box { background: rgba(102,126,234,0.10); border: 1px solid rgba(0,245,255,0.30); border-radius: 12px; padding: 22px; margin-bottom: 22px; }
 
-        .company-intro strong {
-            color: #00f5ff;
-            font-weight: 700;
-        }
+    .company-intro { font-size: 1.08rem; margin-bottom: 18px; text-align: center; color: var(--text); }
+    .company-intro strong { color: var(--cyan); font-weight: 700; }
 
-        .rules-list {
-            background: rgba(255,255,255,0.02);
-            border-left: 4px solid #00f5ff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
+    .rules-list { background: rgba(255,255,255,0.03); border-left: 4px solid var(--cyan); padding: 18px; margin: 16px 0; border-radius: 8px; }
+    .rule-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 1rem; }
+    .rule-item:last-child { margin-bottom: 0; }
+    .rule-icon { color: var(--cyan); font-size: 1.1rem; line-height: 1.2; }
+    .rule-text { color: var(--text); }
 
-        .rule-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
+    .footer-message { background: linear-gradient(135deg, var(--cyan), #7ad7ff); color: #0a0a0a; padding: 16px; border-radius: 12px; text-align: center; font-size: 1.05rem; font-weight: 700; margin-top: 18px; }
 
-        .rule-item:last-child {
-            margin-bottom: 0;
-        }
+    /* Accessibilité / préférences */
+    a { -webkit-tap-highlight-color: transparent; }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition: none !important; } }
 
-        .rule-icon {
-            color: #00f5ff;
-            font-size: 1.1rem;
-            margin-right: 10px;
-            margin-top: 2px;
-        }
-
-        .rule-text {
-            color: #e8e8e8;
-            line-height: 1.5;
-        }
-
-        .footer-message {
-            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-top: 25px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.6rem;
-            }
-            
-            .discord-button {
-                font-size: 1rem;
-                padding: 12px 25px;
-            }
-        }
-    </style>
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.6rem; }
+      .header-subtitle { font-size: .98rem; }
+      .btn { font-size: .95rem; padding: 10px 18px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1>⚠️ NOTICE SETTINGS ⚠️</h1>
-            <p class="header-subtitle">Utilisation Responsable des Modèles IA</p>
-            <a href="https://discord.gg/cPs2pMR8nz" class="discord-button" target="_top">
-                💬 Rejoindre notre Discord
-            </a>
-        </header>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>Notice d’utilisation responsable</h1>
+      <p class="header-subtitle">Utilisation éthique et responsable des modèles IA</p>
+      <div class="cta-row">
+        <a class="btn btn-discord" href="https://discord.gg/cPs2pMR8nz" target="_top" rel="noopener noreferrer">💬 Rejoindre notre Discord</a>
+      </div>
+    </header>
 
-        <!-- Main Content -->
-        <div class="content">
-            <div class="notice-box">
-                <p class="company-intro">
-                    Chez <strong>ScioNos</strong>, nous croyons en une intelligence artificielle <strong>éthique et accessible</strong>.
-                </p>
+    <!-- Lien retour -->
+    <nav class="top-nav" aria-label="Fil d’Ariane">
+      <a href="/page-accueil-scionos/">← Retour à l’accueil</a>
+    </nav>
 
-                <div class="rules-list">
-                    <div class="rule-item">
-                        <span class="rule-icon">🔹</span>
-                        <span class="rule-text">
-                            Nos modèles sont open-source et libres d'utilisation, 
-                            mais <strong>VOUS</strong> êtes responsable de leur usage.
-                        </span>
-                    </div>
-                    <div class="rule-item">
-                        <span class="rule-icon">🔹</span>
-                        <span class="rule-text">
-                            Respectez les lois en vigueur et adoptez une 
-                            approche transparente et bienveillante.
-                        </span>
-                    </div>
-                    <div class="rule-item">
-                        <span class="rule-icon">🔹</span>
-                        <span class="rule-text">
-                            Nous déclinons toute responsabilité en cas d'usage 
-                            abusif ou contraire aux réglementations.
-                        </span>
-                    </div>
-                </div>
-            </div>
+    <!-- Contenu principal -->
+    <main class="content">
+      <div class="warning-title" role="note" aria-label="Avertissement">
+        ⚠️ Merci de lire ces informations avant d’utiliser les modèles IA
+      </div>
 
-            <div class="footer-message">
-                🚀 Ensemble, construisons une IA respectueuse et bénéfique pour tous !
-            </div>
+      <section class="notice-box">
+        <p class="company-intro">
+          Chez <strong>ScioNos</strong>, nous croyons en une intelligence artificielle <strong>éthique et accessible</strong>.
+        </p>
+
+        <div class="rules-list">
+          <div class="rule-item">
+            <span class="rule-icon">🔹</span>
+            <span class="rule-text">Nos modèles sont open‑source et libres d’utilisation, mais <strong>vous</strong> êtes responsable de leur usage.</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-icon">🔹</span>
+            <span class="rule-text">Respectez les lois en vigueur et adoptez une approche transparente et bienveillante.</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-icon">🔹</span>
+            <span class="rule-text">Nous déclinons toute responsabilité en cas d’usage abusif ou contraire aux réglementations.</span>
+          </div>
         </div>
-    </div>
+      </section>
+
+      <p style="color: var(--muted); font-size: .95rem; text-align:center;">Dernière mise à jour : 11 août 2025</p>
+
+      <div class="footer-message">
+        🚀 Ensemble, construisons une IA respectueuse et bénéfique pour toutes et tous !
+      </div>
+    </main>
+  </div>
 </body>
 </html>
