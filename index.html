@@ -12,7 +12,6 @@
     }
 
     :root {
-      /* Couleurs ScioNos.ch */
       --primary: #3b82f6;
       --secondary: #a855f7;
       --accent: #f97316;
@@ -26,9 +25,10 @@
 
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg-dark);
+      background: linear-gradient(180deg, #0a0f1a 0%, #0b0f1a 50%, #0a1022 100%);
       color: var(--text);
       line-height: 1.6;
+      min-height: 100vh;
     }
 
     .container {
@@ -37,64 +37,42 @@
       padding: 0 20px;
     }
 
-    /* Header Simple */
-    header {
+    .quick-links {
       background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-
-    .header-content {
+      border: 1px solid var(--border);
+      padding: 15px 20px;
+      margin-bottom: 40px;
+      border-radius: 12px;
       display: flex;
-      justify-content: space-between;
+      gap: 20px;
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      gap: 20px;
     }
 
-    .logo {
-      font-size: 2rem;
-      font-weight: 900;
-    }
-
-    .logo .scio {
-      color: var(--primary);
-    }
-
-    .logo .nos {
-      color: var(--secondary);
-    }
-
-    .header-links {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-
-    .header-link {
-      color: var(--text-muted);
+    .quick-link {
+      color: var(--text);
       text-decoration: none;
-      padding: 8px 16px;
+      padding: 8px 20px;
       border-radius: 8px;
       transition: all 0.2s;
       font-size: 0.95rem;
-    }
-
-    .header-link:hover {
-      color: var(--text);
+      font-weight: 600;
       background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
     }
 
-    /* Prix Banner - ULTRA VISIBLE */
+    .quick-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+      transform: translateY(-2px);
+    }
+
     .price-banner {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, #1e3a8a 0%, var(--primary) 50%, var(--secondary) 100%);
       padding: 40px 20px;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
     .price-banner h1 {
@@ -127,20 +105,21 @@
       font-weight: 600;
     }
 
-    /* Bot9000 */
     .bot-section {
-      background: rgba(59, 130, 246, 0.05);
-      border: 2px solid rgba(59, 130, 246, 0.2);
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(59, 130, 246, 0.1));
+      border: 2px solid rgba(59, 130, 246, 0.3);
       border-radius: 16px;
       padding: 30px;
       margin-bottom: 50px;
       text-align: center;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
     }
 
     .bot-section h2 {
       font-size: 2rem;
       color: var(--primary);
       margin-bottom: 10px;
+      text-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
     }
 
     .bot-section p {
@@ -158,11 +137,17 @@
 
     .bot-model {
       padding: 8px 16px;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
       border-radius: 20px;
       font-size: 0.9rem;
       color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .bot-model:hover {
+      background: rgba(59, 130, 246, 0.25);
+      transform: translateY(-2px);
     }
 
     .btn {
@@ -171,23 +156,24 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.2s;
+      transition: all 0.3s;
       cursor: pointer;
       border: none;
       font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .btn-primary {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
     }
 
     .btn-primary:hover {
-      background: #2563eb;
+      background: linear-gradient(135deg, #2563eb, #9333ea);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
     }
 
-    /* Section Title */
     .section {
       margin-bottom: 50px;
     }
@@ -199,6 +185,7 @@
       display: flex;
       align-items: center;
       gap: 15px;
+      text-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
     }
 
     .section-title.free {
@@ -206,15 +193,18 @@
     }
 
     .section-title.premium {
-      color: var(--primary);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* Table Simple et Claire */
     .table-wrapper {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: rgba(10, 16, 40, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
       border-radius: 12px;
       overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     table {
@@ -223,7 +213,7 @@
     }
 
     th {
-      background: rgba(59, 130, 246, 0.1);
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(59, 130, 246, 0.2));
       padding: 16px;
       text-align: left;
       font-weight: 700;
@@ -231,16 +221,16 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 2px solid rgba(59, 130, 246, 0.3);
     }
 
     td {
       padding: 16px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.1);
     }
 
     tr:hover {
-      background: rgba(59, 130, 246, 0.03);
+      background: rgba(59, 130, 246, 0.05);
     }
 
     tr:last-child td {
@@ -261,15 +251,16 @@
       font-weight: 700;
       text-transform: uppercase;
       margin-left: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .badge-free {
-      background: var(--success);
+      background: linear-gradient(135deg, #059669, #10b981);
       color: white;
     }
 
     .badge-premium {
-      background: var(--secondary);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
     }
 
@@ -292,10 +283,9 @@
       font-style: italic;
     }
 
-    /* Footer */
     footer {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg-dark), #0a1128);
+      border-top: 2px solid rgba(59, 130, 246, 0.2);
       padding: 40px 0;
       margin-top: 80px;
       text-align: center;
@@ -311,6 +301,8 @@
     .footer-link {
       color: var(--text-muted);
       text-decoration: none;
+      transition: all 0.2s;
+      padding: 5px 10px;
     }
 
     .footer-link:hover {
@@ -322,7 +314,6 @@
       font-size: 0.9rem;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .price-banner h1 {
         font-size: 2.5rem;
@@ -340,38 +331,19 @@
         padding: 10px 8px;
       }
 
-      .header-content {
+      .quick-links {
         flex-direction: column;
-        align-items: flex-start;
+        gap: 10px;
       }
-    }
 
-    /* Colonnes responsives */
-    @media (max-width: 1024px) {
-      .hide-mobile {
-        display: none;
+      .quick-link {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header Simple -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <span class="scio">Scio</span><span class="nos">Nos</span>
-        </div>
-        <div class="header-links">
-          <a href="https://scionos.ch" class="header-link" target="_blank">🌐 Site</a>
-          <a href="https://discord.gg/cPs2pMR8nz" class="header-link" target="_blank">💬 Discord</a>
-          <a href="https://bot9000.snia.ch" class="header-link" target="_blank">🤖 Bot9000</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- PRIX BANNER - MEGA VISIBLE -->
   <div class="price-banner">
     <div class="container">
       <h1>10$/mois</h1>
@@ -397,9 +369,15 @@
     </div>
   </div>
 
-  <!-- Container Principal -->
   <div class="container">
-    <!-- Bot9000 Section -->
+    <div class="quick-links">
+      <a href="https://scionos.ch" class="quick-link" target="_blank">🌐 Site Web ScioNos</a>
+      <a href="https://discord.gg/cPs2pMR8nz" class="quick-link" target="_blank">💬 Rejoindre Discord</a>
+      <a href="https://bot9000.snia.ch" class="quick-link" target="_blank">🤖 Essayer Bot9000</a>
+    </div>
+  </div>
+
+  <div class="container">
     <div class="bot-section">
       <h2>🤖 Bot9000</h2>
       <p>Interface unifiée pour tous les modèles - Essayez maintenant</p>
@@ -416,7 +394,6 @@
       <a href="https://bot9000.snia.ch" class="btn btn-primary" target="_blank">Accéder à Bot9000 →</a>
     </div>
 
-    <!-- MODÈLES GRATUITS EN PREMIER -->
     <section class="section">
       <h2 class="section-title free">🆓 Modèles Gratuits</h2>
       <div class="table-wrapper">
@@ -492,7 +469,6 @@
       </div>
     </section>
 
-    <!-- MODÈLES PREMIUM -->
     <section class="section">
       <h2 class="section-title premium">⚡ Modèles Premium - DeepSeek</h2>
       <div class="table-wrapper">
@@ -557,7 +533,6 @@
       </div>
     </section>
 
-    <!-- Qwen Models -->
     <section class="section">
       <h2 class="section-title premium">⚡ Modèles Premium - Qwen</h2>
       <div class="table-wrapper">
@@ -644,7 +619,6 @@
       </div>
     </section>
 
-    <!-- GPT-OSS Models -->
     <section class="section">
       <h2 class="section-title premium">⚡ Modèles Premium - GPT-OSS</h2>
       <div class="table-wrapper">
@@ -687,7 +661,6 @@
       </div>
     </section>
 
-    <!-- GLM & Kimi Models -->
     <section class="section">
       <h2 class="section-title premium">⚡ Modèles Premium - Agents</h2>
       <div class="table-wrapper">
@@ -764,7 +737,6 @@
     </section>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       <div class="footer-links">
