@@ -48,6 +48,69 @@
       color: white !important;
     }
 
+    /* Top Bar avec logo et liens */
+    .top-bar {
+      background: rgba(10, 16, 34, 0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      backdrop-filter: blur(10px);
+    }
+
+    .top-bar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .top-logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .top-logo .scio {
+      color: var(--primary);
+    }
+
+    .top-logo .nos {
+      color: var(--secondary);
+    }
+
+    .top-links {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .top-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+
+    .top-link:hover {
+      color: var(--text);
+      background: rgba(59, 130, 246, 0.15);
+      transform: translateY(-1px);
+    }
+
     .container {
       max-width: 1400px;
       margin: 0 auto;
@@ -258,65 +321,40 @@
       font-style: italic;
     }
 
-    /* Footer amélioré avec les liens */
+    /* Footer simplifié */
     footer {
       background: var(--bg-card);
       border-top: 1px solid var(--border);
       padding: 40px 0;
       margin-top: 80px;
-    }
-
-    .footer-content {
       text-align: center;
     }
 
-    .footer-logo {
-      font-size: 2rem;
-      font-weight: 900;
-      margin-bottom: 20px;
-    }
-
-    .footer-logo .scio {
-      color: var(--primary);
-    }
-
-    .footer-logo .nos {
-      color: var(--secondary);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      color: var(--text);
-      text-decoration: none;
-      padding: 10px 20px;
-      background: rgba(59, 130, 246, 0.1);
-      border-radius: 8px;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .footer-link:hover {
-      background: rgba(59, 130, 246, 0.2);
-      transform: translateY(-2px);
+    .footer-content {
+      color: var(--text-muted);
     }
 
     .footer-date {
       color: var(--text-muted);
       font-size: 0.9rem;
-      margin-top: 10px;
+      margin: 5px 0;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
+      .top-bar-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .top-logo {
+        justify-content: center;
+      }
+
+      .top-links {
+        justify-content: center;
+      }
+
       .price-banner h1 {
         font-size: 2.5rem;
       }
@@ -343,6 +381,28 @@
   </style>
 </head>
 <body>
+  <!-- Top Bar avec Logo et Liens -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-content">
+        <a href="https://scionos.ch" class="top-logo" target="_blank">
+          <span class="scio">Scio</span><span class="nos">Nos</span>
+        </a>
+        <div class="top-links">
+          <a href="https://scionos.ch" class="top-link" target="_blank">
+            🌐 Site Web
+          </a>
+          <a href="https://discord.gg/cPs2pMR8nz" class="top-link" target="_blank">
+            💬 Discord
+          </a>
+          <a href="https://bot9000.snia.ch" class="top-link" target="_blank">
+            🤖 Bot9000
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Le header de new-api s'affichera automatiquement ici -->
   
   <!-- PRIX BANNER - MEGA VISIBLE -->
@@ -738,24 +798,10 @@
     </section>
   </div>
 
-  <!-- Footer avec les liens déplacés -->
+  <!-- Footer simplifié -->
   <footer>
     <div class="container">
       <div class="footer-content">
-        <div class="footer-logo">
-          <span class="scio">Scio</span><span class="nos">Nos</span>
-        </div>
-        <div class="footer-links">
-          <a href="https://scionos.ch" class="footer-link" target="_blank">
-            🌐 Site Web
-          </a>
-          <a href="https://discord.gg/cPs2pMR8nz" class="footer-link" target="_blank">
-            💬 Discord
-          </a>
-          <a href="https://bot9000.snia.ch" class="footer-link" target="_blank">
-            🤖 Bot9000
-          </a>
-        </div>
         <p class="footer-date">📅 Mis à jour le 1er octobre 2025</p>
         <p class="footer-date">© 2025 ScioNos - Infrastructure GPU B200</p>
       </div>
