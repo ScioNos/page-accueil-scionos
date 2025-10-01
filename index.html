@@ -3,201 +3,423 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScioNos - Modèles Disponibles (refonte Bot9000)</title>
+  <title>ScioNos - Modèles IA Disponibles</title>
   <style>
-    :root {
-      /* Palette ScioNos */
-      --bg-dark: #0a0a0a;
-      --bg-deep: #1a1a2e;
-      --cyan: #00f5ff;
-      --cyan-20: rgba(0, 245, 255, 0.2);
-      --cyan-30: rgba(0, 245, 255, 0.3);
-      --cyan-40: rgba(0, 245, 255, 0.4);
-      --indigo: #667eea;
-      --purple: #764ba2;
-      --white: #e8e8e8;
-      --muted: #b9c0ff;
-      --glass: rgba(255, 255, 255, 0.06);
-      --glass-border: rgba(255, 255, 255, 0.15);
-      --success: #4ade80;
-      --danger: #f87171;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      /* Couleurs ScioNos.ch */
+      --primary: #3b82f6;
+      --secondary: #a855f7;
+      --accent: #f97316;
+      --bg-dark: #0b0f1a;
+      --bg-card: #0a1022;
+      --text: #e8e8e8;
+      --text-muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.1);
+      --success: #10b981;
+    }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
-      color: var(--white);
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
       line-height: 1.6;
-      min-height: 100vh;
     }
 
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
-
-    /* Header */
-    .header {
-      background: linear-gradient(135deg, var(--indigo) 0%, var(--purple) 100%);
-      padding: 50px 0; text-align: center; position: relative; overflow: hidden;
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-    .header::before {
-      content: ""; position: absolute; inset: -50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 50px 50px; animation: drift 20s linear infinite;
+
+    /* Header Simple */
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
     }
-    @keyframes drift { to { transform: translate(50px, 50px); } }
-    .header h1 { font-size: 3rem; font-weight: 900; margin-bottom: 15px; color: #fff; position: relative; z-index: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-    .header-subtitle { font-size: 1.2rem; opacity: 0.95; color: rgba(255,255,255,0.9); margin-bottom: 30px; position: relative; z-index: 1; }
 
-    .header-buttons { display: flex; gap: 20px; justify-content: center; position: relative; z-index: 1; flex-wrap: wrap; }
-    .btn { display: inline-block; padding: 14px 30px; text-decoration: none; border-radius: 30px; font-weight: 700; font-size: 1.05rem; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
-    .btn-discord { background: linear-gradient(45deg, #5865f2, #7289da); color: #fff; box-shadow: 0 10px 30px rgba(88, 101, 242, 0.4); }
-    .btn-discord:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 15px 40px rgba(88, 101, 242, 0.6); }
-    .btn-site { background: rgba(0, 245, 255, 0.15); color: var(--cyan); border: 2px solid var(--cyan); backdrop-filter: blur(10px); }
-    .btn-site:hover { background: var(--cyan); color: var(--bg-dark); transform: translateY(-3px) scale(1.05); box-shadow: 0 15px 40px var(--cyan-40); }
-
-    /* Sections */
-    .section { padding: 60px 0; }
-    .section-title { font-size: 2.2rem; margin-bottom: 40px; background: linear-gradient(135deg, var(--cyan), var(--indigo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; text-align: center; position: relative; }
-
-    /* Card verre */
-    .glass { background: var(--glass); border: 2px solid var(--glass-border); border-radius: 20px; backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.25); }
-
-    /* Access card */
-    .access-info { display: flex; justify-content: center; margin-bottom: 50px; }
-    .access-card { position: relative; padding: 35px 50px; text-align: center; max-width: 700px; }
-    .access-card h3 { color: var(--cyan); margin-bottom: 16px; font-size: 1.6rem; font-weight: 800; }
-    .access-card p { color: var(--white); font-size: 1.05rem; }
-
-    /* === Bot9000 (relooké pour cohérence) === */
-    .bot9000-section {
-      position: relative; overflow: hidden; padding: 40px; margin: 40px 0;
-      background: linear-gradient(135deg, rgba(0,245,255,0.10), rgba(102,126,234,0.10));
-      border: 2px solid var(--cyan-30); border-radius: 30px;
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
-    .bot9000-section::before {
-      content: ""; position: absolute; inset: -2px; z-index: -1; border-radius: 30px;
-      background: linear-gradient(45deg, var(--cyan), var(--indigo), var(--purple), var(--cyan)); opacity: 0.35; filter: blur(12px);
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
     }
-    .bot9000-title { font-size: 2.3rem; font-weight: 900; margin-bottom: 8px; background: linear-gradient(45deg, var(--cyan), var(--indigo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .bot9000-subtitle { font-size: 1.15rem; color: var(--muted); margin-bottom: 16px; font-weight: 600; }
-    .bot9000-desc { color: var(--white); opacity: 0.95; margin-bottom: 22px; }
 
-    .bot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px; }
-    .bot-chip { background: rgba(255,255,255,0.05); border: 1px solid var(--cyan-30); border-radius: 14px; padding: 12px; font-weight: 600; color: var(--white); transition: all .25s ease; text-align: center; }
-    .bot-chip:hover { background: var(--cyan-20); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 245, 255, 0.18); }
+    .logo .scio {
+      color: var(--primary);
+    }
 
-    .btn-bot9000 { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; padding: 12px 28px; border-radius: 28px; font-weight: 800; font-size: 1.02rem; text-decoration: none; color: var(--bg-dark); background: linear-gradient(135deg, var(--cyan), #7ad7ff); border: 2px solid var(--cyan);
-      box-shadow: 0 15px 35px rgba(0, 245, 255, 0.25); transition: transform .2s ease, box-shadow .2s ease; }
-    .btn-bot9000:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 18px 40px rgba(0, 245, 255, 0.35); }
+    .logo .nos {
+      color: var(--secondary);
+    }
 
-    /* Tables */
-    .table-container { background: var(--glass); border: 2px solid var(--glass-border); border-radius: 20px; padding: 30px; margin-bottom: 50px; overflow-x: auto; backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: fadeIn .6s ease-out; }
-    .table-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 22px; color: var(--cyan); display: flex; align-items: center; gap: 10px; }
-    table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
-    th:nth-child(1), td:nth-child(1) { width: 35%; text-align: left; }
-    th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3), th:nth-child(4), td:nth-child(4) { width: 12%; text-align: center; }
-    th:nth-child(5), td:nth-child(5) { width: 14%; text-align: center; }
-    th:nth-child(6), td:nth-child(6) { width: 15%; text-align: left; }
-    th, td { padding: 15px 10px; border-bottom: 1px solid rgba(255,255,255,0.1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    th { background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)); color: var(--cyan); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 10; }
-    td { color: var(--white); font-size: 0.95rem; }
-    tr { transition: all 0.3s ease; }
-    tr:hover { background: rgba(255,255,255,0.05); }
+    .header-links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
 
-    .model-name { font-weight: 700; color: #fff; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
-    .feature-yes { color: var(--success); font-weight: 700; font-size: 1rem; }
-    .feature-no { color: var(--danger); font-weight: 700; font-size: 1rem; }
-    .free-model { background: linear-gradient(90deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%); }
-    .free-tag { background: linear-gradient(135deg, #059669, #10b981); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3); white-space: nowrap; }
-    .premium-tag { background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3); white-space: nowrap; }
+    .header-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
 
-    /* Services */
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .service-card { padding: 28px; transition: all .25s ease; }
-    .service-card:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 20px 40px rgba(0, 245, 255, 0.18); }
-    .service-card h4 { color: var(--cyan); margin-bottom: 16px; font-size: 1.25rem; font-weight: 700; }
-    .service-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 10px; transition: all 0.2s ease; }
-    .service-item:hover { background: rgba(255,255,255,0.05); transform: translateX(5px); }
-    .service-item span:first-child { color: #d0d0d0; font-weight: 500; }
-    .service-item span:last-child { color: var(--success); font-weight: 700; }
+    .header-link:hover {
+      color: var(--text);
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    /* Prix Banner - ULTRA VISIBLE */
+    .price-banner {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 40px 20px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .price-banner h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .price-banner .subtitle {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 20px;
+    }
+
+    .price-banner .features {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .price-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Bot9000 */
+    .bot-section {
+      background: rgba(59, 130, 246, 0.05);
+      border: 2px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .bot-section h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .bot-section p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .bot-models {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .bot-model {
+      padding: 8px 16px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    /* Section Title */
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section-title.free {
+      color: var(--success);
+    }
+
+    .section-title.premium {
+      color: var(--primary);
+    }
+
+    /* Table Simple et Claire */
+    .table-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: rgba(59, 130, 246, 0.1);
+      padding: 16px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tr:hover {
+      background: rgba(59, 130, 246, 0.03);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .model-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-left: 8px;
+    }
+
+    .badge-free {
+      background: var(--success);
+      color: white;
+    }
+
+    .badge-premium {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .yes {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .no {
+      color: var(--text-muted);
+    }
+
+    .context {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .specialty {
+      color: var(--text-muted);
+      font-style: italic;
+    }
 
     /* Footer */
-    .footer { background: linear-gradient(180deg, transparent, rgba(255,255,255,0.02)); padding: 40px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 80px; }
-    .footer-date { color: #888; font-size: 0.95rem; font-weight: 500; }
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      margin-top: 80px;
+      text-align: center;
+    }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .footer-date {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
 
     /* Responsive */
-    @media (max-width: 1200px) {
-      .model-name { font-size: 0.85rem; }
-      .free-tag, .premium-tag { font-size: 0.65rem; padding: 3px 8px; }
-    }
-    @media (max-width: 900px) { .bot-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 700px) { .bot-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 768px) {
-      .header h1 { font-size: 2.2rem; }
-      .section-title { font-size: 1.8rem; }
-      .header-buttons { flex-direction: column; align-items: center; }
-      table { font-size: 0.8rem; }
-      th, td { padding: 10px 5px; }
+      .price-banner h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th, td {
+        padding: 10px 8px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Colonnes responsives */
+    @media (max-width: 1024px) {
+      .hide-mobile {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
+  <!-- Header Simple -->
+  <header>
     <div class="container">
-      <h1>🚀 ScioNos</h1>
-      <p class="header-subtitle">Modèles IA Disponibles - Infrastructure GPU B200</p>
-      <div class="header-buttons">
-        <a href="https://discord.gg/cPs2pMR8nz" class="btn btn-discord" target="_blank">💬 Rejoindre Discord</a>
-        <a href="https://scionos.ch" class="btn btn-site" target="_blank">🌐 Site Web</a>
-        <a href="https://bot9000.snia.ch" class="btn btn-site" target="_blank">🤖 Bot9000 Chat</a>
+      <div class="header-content">
+        <div class="logo">
+          <span class="scio">Scio</span><span class="nos">Nos</span>
+        </div>
+        <div class="header-links">
+          <a href="https://scionos.ch" class="header-link" target="_blank">🌐 Site</a>
+          <a href="https://discord.gg/cPs2pMR8nz" class="header-link" target="_blank">💬 Discord</a>
+          <a href="https://bot9000.snia.ch" class="header-link" target="_blank">🤖 Bot9000</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Access Information -->
-  <section class="section">
+  <!-- PRIX BANNER - MEGA VISIBLE -->
+  <div class="price-banner">
     <div class="container">
-      <div class="access-info">
-        <div class="access-card glass">
-          <h3>💰 Crédit $10/mois</h3>
-          <p>Accès illimité aux modèles Open-Source • Modèles OpenAI sur demande • Infrastructure GPU B200 • Augmentation de crédit disponible</p>
+      <h1>10$/mois</h1>
+      <p class="subtitle">Accès illimité à 50+ modèles IA sur infrastructure B200</p>
+      <div class="features">
+        <div class="price-feature">
+          <span>✓</span>
+          <span>5 modèles gratuits</span>
+        </div>
+        <div class="price-feature">
+          <span>✓</span>
+          <span>Modèles premium illimités</span>
+        </div>
+        <div class="price-feature">
+          <span>✓</span>
+          <span>API compatible OpenAI</span>
+        </div>
+        <div class="price-feature">
+          <span>✓</span>
+          <span>GPU B200</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Bot9000 Section (relookée et mise en avant) -->
-  <section class="section" style="padding: 40px 0;">
-    <div class="container">
-      <div class="bot9000-section glass">
-        <h2 class="bot9000-title">🤖 Bot9000</h2>
-        <p class="bot9000-subtitle">ChatBot IA multimodèle • Cohérent avec l'univers ScioNos</p>
-        <p class="bot9000-desc">Accédez aux meilleurs modèles IA dans une interface unifiée</p>
-        <div class="bot-grid">
-          <div class="bot-chip">GPT-5-Nano</div>
-          <div class="bot-chip">GPT-5-Mini</div>
-          <div class="bot-chip">GPT-5-Chat</div>
-          <div class="bot-chip">Grok-4</div>
-          <div class="bot-chip">GPT-OSS-120B</div>
-          <div class="bot-chip">Gemini-2.5-Pro</div>
-          <div class="bot-chip">Kimi-K2</div>
-          <div class="bot-chip">GLM-4.5</div>
-        </div>
-        <a href="https://bot9000.snia.ch" class="btn-bot9000" target="_blank">🚀 Essayer Bot9000</a>
+  <!-- Container Principal -->
+  <div class="container">
+    <!-- Bot9000 Section -->
+    <div class="bot-section">
+      <h2>🤖 Bot9000</h2>
+      <p>Interface unifiée pour tous les modèles - Essayez maintenant</p>
+      <div class="bot-models">
+        <span class="bot-model">GPT-5-Nano</span>
+        <span class="bot-model">GPT-5-Mini</span>
+        <span class="bot-model">GPT-5-Chat</span>
+        <span class="bot-model">Grok-4</span>
+        <span class="bot-model">GPT-OSS-120B</span>
+        <span class="bot-model">Gemini-2.5-Pro</span>
+        <span class="bot-model">Kimi-K2</span>
+        <span class="bot-model">GLM-4.5</span>
       </div>
+      <a href="https://bot9000.snia.ch" class="btn btn-primary" target="_blank">Accéder à Bot9000 →</a>
     </div>
-  </section>
 
-  <!-- Free Models -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">🆓 Modèles Totalement Gratuits</h2>
-      <div class="table-container glass">
-        <div class="table-title"><span>✨</span><span>Accès gratuit illimité - Sans inscription</span></div>
+    <!-- MODÈLES GRATUITS EN PREMIER -->
+    <section class="section">
+      <h2 class="section-title free">🆓 Modèles Gratuits</h2>
+      <div class="table-wrapper">
         <table>
           <thead>
             <tr>
@@ -210,58 +432,70 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="free-model">
-              <td><div class="model-name">deepseek-v3.1-free <span class="free-tag">GRATUIT</span></div></td>
-              <td class="feature-yes">✅ Oui</td>
-              <td class="feature-no">❌ Non</td>
-              <td class="feature-yes">✅ Oui</td>
-              <td>128K tokens</td>
-              <td>Raisonnement hybride</td>
+            <tr>
+              <td>
+                <span class="model-name">deepseek-v3.1-free</span>
+                <span class="badge badge-free">Gratuit</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">128K</td>
+              <td class="specialty">Raisonnement hybride</td>
             </tr>
-            <tr class="free-model">
-              <td><div class="model-name">qwen3-next-80b-a3b-thinking-free <span class="free-tag">GRATUIT</span></div></td>
-              <td class="feature-yes">✅ Oui</td>
-              <td class="feature-no">❌ Non</td>
-              <td class="feature-yes">✅ Oui</td>
-              <td>256K tokens</td>
-              <td>Raisonnement efficace</td>
+            <tr>
+              <td>
+                <span class="model-name">qwen3-next-80b-a3b-thinking-free</span>
+                <span class="badge badge-free">Gratuit</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">256K</td>
+              <td class="specialty">Raisonnement efficace</td>
             </tr>
-            <tr class="free-model">
-              <td><div class="model-name">qwen3-coder-480b-a35b-instruct-free <span class="free-tag">GRATUIT</span></div></td>
-              <td class="feature-yes">✅ Oui</td>
-              <td class="feature-no">❌ Non</td>
-              <td class="feature-no">❌ Non</td>
-              <td>256K tokens</td>
-              <td>Codage agentic</td>
+            <tr>
+              <td>
+                <span class="model-name">qwen3-coder-480b-a35b-instruct-free</span>
+                <span class="badge badge-free">Gratuit</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="no">–</td>
+              <td class="context">256K</td>
+              <td class="specialty">Codage agentic</td>
             </tr>
-            <tr class="free-model">
-              <td><div class="model-name">gpt-oss-120b-free <span class="free-tag">GRATUIT</span></div></td>
-              <td class="feature-yes">✅ Oui</td>
-              <td class="feature-no">❌ Non</td>
-              <td class="feature-yes">✅ Oui</td>
-              <td>200K tokens</td>
-              <td>Raisonnement open-source</td>
+            <tr>
+              <td>
+                <span class="model-name">gpt-oss-120b-free</span>
+                <span class="badge badge-free">Gratuit</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">128K</td>
+              <td class="specialty">Reasoning OpenAI</td>
             </tr>
-            <tr class="free-model">
-              <td><div class="model-name">seed-oss-36b-instruct-free <span class="free-tag">GRATUIT</span></div></td>
-              <td class="feature-yes">✅ Oui</td>
-              <td class="feature-no">❌ Non</td>
-              <td class="feature-yes">✅ Oui</td>
-              <td>512K tokens</td>
-              <td>Contexte ultra-long</td>
+            <tr>
+              <td>
+                <span class="model-name">seed-oss-36b-instruct-free</span>
+                <span class="badge badge-free">Gratuit</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">512K</td>
+              <td class="specialty">Contexte ultra-long</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Ultra-Efficient Models -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">🔥 Modèles Ultra-Efficaces (MoE Sparse)</h2>
-      <div class="table-container glass">
-        <div class="table-title"><span>⚡</span><span>Activation sparse - 3-5B paramètres actifs seulement</span></div>
+    <!-- MODÈLES PREMIUM -->
+    <section class="section">
+      <h2 class="section-title premium">⚡ Modèles Premium - DeepSeek</h2>
+      <div class="table-wrapper">
         <table>
           <thead>
             <tr>
@@ -274,22 +508,59 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td><div class="model-name">Qwen3-Next-80B-A3B-Instruct <span style="font-size:0.75rem;color:#00f5ff;font-weight:600;">(80B/3B actifs)</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-no">❌ Non</td><td>256K tokens</td><td>Instructions optimisées</td></tr>
-            <tr><td><div class="model-name">Qwen3-Next-80B-A3B-Thinking <span style="font-size:0.75rem;color:#00f5ff;font-weight:600;">(80B/3B actifs)</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-yes">✅ Oui</td><td>256K tokens</td><td>Raisonnement hybride</td></tr>
-            <tr><td><div class="model-name">GPT-OSS-120B <span style="font-size:0.75rem;color:#00f5ff;font-weight:600;">(117B/5.1B actifs)</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-yes">✅ Oui</td><td>Configurable</td><td>Reasoning OpenAI</td></tr>
-            <tr><td><div class="model-name">GPT-OSS-20B <span style="font-size:0.75rem;color:#00f5ff;font-weight:600;">(21B/3.6B actifs)</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-yes">✅ Oui</td><td>Configurable</td><td>Ultra-rapide (16GB)</td></tr>
+            <tr>
+              <td>
+                <span class="model-name">DeepSeek-V3.2-Exp</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">160K</td>
+              <td class="specialty">Sparse Attention</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">DeepSeek-V3.1-Terminus</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">160K</td>
+              <td class="specialty">Agents avancés</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">DeepSeek-V3</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">128K</td>
+              <td class="specialty">Hybride tool use</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">DeepSeek-R1-0528-Turbo</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">32K</td>
+              <td class="specialty">Reasoning rapide</td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Agent & Tools Models -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">🚀 Modèles Agents & Outils</h2>
-      <div class="table-container glass">
-        <div class="table-title"><span>🤖</span><span>Spécialisés pour workflows agentic et tool use</span></div>
+    <!-- Qwen Models -->
+    <section class="section">
+      <h2 class="section-title premium">⚡ Modèles Premium - Qwen</h2>
+      <div class="table-wrapper">
         <table>
           <thead>
             <tr>
@@ -302,22 +573,81 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td><div class="model-name">Kimi-K2-Instruct-0905 <span style="font-size:0.75rem;color:#00f5ff;font-weight:600;">(1T/32B actifs)</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-no">❌ Non</td><td>256K tokens</td><td>Agents premium</td></tr>
-            <tr><td><div class="model-name">GLM-4.5 <span style="font-size:0.75rem;color:#00f5ff;font-weight:600;">(355B/32B actifs)</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-yes">✅ Oui</td><td>128K tokens</td><td>Agents hybrides</td></tr>
-            <tr><td><div class="model-name">GLM-4.5-Air <span style="font-size:0.75rem;color:#00f5ff;font-weight:600;">(106B/12B actifs)</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-yes">✅ Oui</td><td>128K tokens</td><td>Agents légers</td></tr>
-            <tr><td><div class="model-name">DeepSeek-V3.1 <span style="font-size:0.75rem;color:#00f5ff;font-weight:600;">(671B/37B actifs)</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-yes">✅ Oui</td><td>128K tokens</td><td>Hybride tool use</td></tr>
+            <tr>
+              <td>
+                <span class="model-name">Qwen3-Next-80B-A3B-Instruct</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="no">–</td>
+              <td class="context">256K</td>
+              <td class="specialty">Instructions optimisées</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">Qwen3-Next-80B-A3B-Thinking</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">256K</td>
+              <td class="specialty">Raisonnement hybride</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">Qwen3-235B-A22B-Thinking-2507</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">256K</td>
+              <td class="specialty">Raisonnement complexe</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">Qwen3-235B-A22B-Instruct-2507</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="no">–</td>
+              <td class="context">256K</td>
+              <td class="specialty">Instructions flagship</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">Qwen3-Coder-480B-A35B-Instruct-Turbo</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="no">–</td>
+              <td class="context">256K</td>
+              <td class="specialty">Codage ultra-rapide</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">Qwen3-Coder-480B-A35B-Instruct</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="no">–</td>
+              <td class="context">256K</td>
+              <td class="specialty">Codage agentic</td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Coding Specialized Models -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">💾 Modèles Codage Spécialisé</h2>
-      <div class="table-container glass">
-        <div class="table-title"><span>⌨️</span><span>Optimisés pour génération de code et développement</span></div>
+    <!-- GPT-OSS Models -->
+    <section class="section">
+      <h2 class="section-title premium">⚡ Modèles Premium - GPT-OSS</h2>
+      <div class="table-wrapper">
         <table>
           <thead>
             <tr>
@@ -330,20 +660,37 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td><div class="model-name">Qwen3-Coder-480B-A35B-Instruct-Turbo</div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-no">❌ Non</td><td>256K tokens</td><td>Codage ultra-rapide</td></tr>
-            <tr><td><div class="model-name">Qwen3-Coder-480B-A35B-Instruct</div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-no">❌ Non</td><td>256K tokens</td><td>Codage agentic</td></tr>
+            <tr>
+              <td>
+                <span class="model-name">GPT-OSS-120B</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">128K</td>
+              <td class="specialty">Reasoning OpenAI</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">GPT-OSS-20B</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">128K</td>
+              <td class="specialty">Ultra-rapide</td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Performance & Reasoning Models -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">📊 Modèles Performance & Raisonnement</h2>
-      <div class="table-container glass">
-        <div class="table-title"><span>🧠</span><span>Modèles flagship pour tâches complexes</span></div>
+    <!-- GLM & Kimi Models -->
+    <section class="section">
+      <h2 class="section-title premium">⚡ Modèles Premium - Agents</h2>
+      <div class="table-wrapper">
         <table>
           <thead>
             <tr>
@@ -356,75 +703,77 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td><div class="model-name">Qwen3-235B-A22B-Thinking-2507</div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-yes">✅ Oui</td><td>256K tokens</td><td>Raisonnement complexe</td></tr>
-            <tr><td><div class="model-name">Qwen3-235B-A22B-Instruct-2507</div></td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td class="feature-no">❌ Non</td><td>256K tokens</td><td>Instructions flagship</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- Proprietary Models -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">🔒 Modèles Propriétaires</h2>
-      <div class="table-container glass">
-        <div class="table-title"><span>📧</span><span>Sur demande - Contactez-nous</span></div>
-        <table>
-          <thead>
             <tr>
-              <th>Modèle</th>
-              <th>Fonctions</th>
-              <th>Vision</th>
-              <th>Réflexion</th>
-              <th>Contexte</th>
-              <th>Créateur</th>
+              <td>
+                <span class="model-name">GLM-4.6</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">200K</td>
+              <td class="specialty">Codage avancé</td>
             </tr>
-          </thead>
-          <tbody>
-            <tr><td><div class="model-name">GPT-4.1 <span class="premium-tag">PREMIUM</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td>1M tokens</td><td>OpenAI</td></tr>
-            <tr><td><div class="model-name">GPT-4.1-Mini <span class="premium-tag">PREMIUM</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td>1M tokens</td><td>OpenAI</td></tr>
-            <tr><td><div class="model-name">GPT-4.1-Nano <span class="premium-tag">PREMIUM</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td>1M tokens</td><td>OpenAI</td></tr>
-            <tr><td><div class="model-name">GPT-4o <span class="premium-tag">PREMIUM</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td>128K tokens</td><td>OpenAI</td></tr>
-            <tr><td><div class="model-name">GPT-4o-Mini <span class="premium-tag">PREMIUM</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td class="feature-no">❌ Non</td><td>128K tokens</td><td>OpenAI</td></tr>
-            <tr><td><div class="model-name">O3 <span class="premium-tag">PREMIUM</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td>200K tokens</td><td>OpenAI</td></tr>
-            <tr><td><div class="model-name">O3-Mini <span class="premium-tag">PREMIUM</span></div></td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td class="feature-yes">✅ Oui</td><td>200K tokens</td><td>OpenAI</td></tr>
+            <tr>
+              <td>
+                <span class="model-name">Kimi-K2-Instruct-0905</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="no">–</td>
+              <td class="context">256K</td>
+              <td class="specialty">Agents premium</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">GLM-4.5</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">128K</td>
+              <td class="specialty">Agents hybrides</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">GLM-4.5-Air</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="no">–</td>
+              <td class="yes">✓</td>
+              <td class="context">128K</td>
+              <td class="specialty">Agents légers</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="model-name">GLM-4.5V</span>
+                <span class="badge badge-premium">Premium</span>
+              </td>
+              <td class="yes">✓</td>
+              <td class="yes">✓</td>
+              <td class="yes">✓</td>
+              <td class="context">128K</td>
+              <td class="specialty">Vision + Agents</td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">🛠️ Services Supplémentaires</h2>
-      <div class="services-grid">
-        <div class="service-card glass">
-          <h4>🔗 Embedding Models</h4>
-          <div class="service-item"><span>text-embedding-3-large</span><span>✅ Disponible</span></div>
-          <div class="service-item"><span>text-embedding-3-small</span><span>✅ Disponible</span></div>
-          <div class="service-item"><span>text-embedding-ada-002</span><span>✅ Disponible</span></div>
-        </div>
-        <div class="service-card glass">
-          <h4>🎵 Text-to-Speech</h4>
-          <div class="service-item"><span>tts-1-hd</span><span>✅ Haute qualité</span></div>
-          <div class="service-item"><span>tts-1</span><span>✅ Standard</span></div>
-        </div>
-        <div class="service-card glass">
-          <h4>🖼️ Image Generation</h4>
-          <div class="service-item"><span>DALL-E 3</span><span>🔜 Bientôt</span></div>
-          <div class="service-item"><span>Stable Diffusion XL</span><span>🔜 Bientôt</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer>
     <div class="container">
-      <p class="footer-date">📅 Mis à jour le 16 septembre 2025</p>
-      <p style="margin-top: 10px; color: #666;">© 2025 ScioNos - Infrastructure GPU B200 de dernière génération</p>
+      <div class="footer-links">
+        <a href="https://scionos.ch" class="footer-link" target="_blank">Site Web</a>
+        <a href="https://discord.gg/cPs2pMR8nz" class="footer-link" target="_blank">Discord</a>
+        <a href="https://bot9000.snia.ch" class="footer-link" target="_blank">Bot9000</a>
+      </div>
+      <p class="footer-date">📅 Mis à jour le 1er octobre 2025</p>
+      <p class="footer-date" style="margin-top: 10px;">© 2025 ScioNos - Infrastructure GPU B200</p>
     </div>
   </footer>
 </body>
