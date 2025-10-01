@@ -29,75 +29,6 @@
       background: var(--bg-dark);
       color: var(--text);
       line-height: 1.6;
-      padding-top: 60px; /* Espace pour la barre fixe */
-    }
-
-    /* Top Bar FIXE au-dessus de tout */
-    .top-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(10, 16, 34, 0.98);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 0;
-      z-index: 9999;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .top-bar-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .top-logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .top-logo .scio {
-      color: var(--primary);
-    }
-
-    .top-logo .nos {
-      color: var(--secondary);
-    }
-
-    .top-links {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .top-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 6px;
-      transition: all 0.2s;
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(59, 130, 246, 0.08);
-      border: 1px solid rgba(59, 130, 246, 0.15);
-      white-space: nowrap;
-    }
-
-    .top-link:hover {
-      color: var(--text);
-      background: rgba(59, 130, 246, 0.15);
-      transform: translateY(-1px);
     }
 
     /* Style pour le header de new-api */
@@ -107,7 +38,6 @@
       background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
       color: white !important;
       padding: 15px 0 !important;
-      margin-top: 0 !important;
     }
 
     body > header *,
@@ -199,9 +129,20 @@
       color: var(--text);
     }
 
+    .bot-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
     .btn {
-      display: inline-block;
-      padding: 12px 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
@@ -209,16 +150,14 @@
       cursor: pointer;
       border: none;
       font-size: 1rem;
-    }
-
-    .btn-primary {
       background: var(--primary);
       color: white;
     }
 
-    .btn-primary:hover {
+    .btn:hover {
       background: #2563eb;
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
     }
 
     /* Section Title */
@@ -347,32 +286,6 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      body {
-        padding-top: 110px; /* Plus d'espace sur mobile car les éléments s'empilent */
-      }
-
-      .top-bar-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 20px;
-      }
-
-      .top-logo {
-        font-size: 1.3rem;
-      }
-
-      .top-links {
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .top-link {
-        font-size: 0.85rem;
-        padding: 5px 12px;
-      }
-
       .price-banner h1 {
         font-size: 2.5rem;
       }
@@ -388,12 +301,15 @@
       th, td {
         padding: 10px 8px;
       }
-    }
 
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .top-link {
-        font-size: 0.85rem;
-        padding: 5px 12px;
+      .bot-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
       }
     }
 
@@ -406,30 +322,6 @@
   </style>
 </head>
 <body>
-  <!-- Top Bar avec Logo et Liens -->
-  <div class="top-bar">
-    <div class="container">
-      <div class="top-bar-content">
-        <a href="https://scionos.ch" class="top-logo" target="_blank">
-          <span class="scio">Scio</span><span class="nos">Nos</span>
-        </a>
-        <div class="top-links">
-          <a href="https://scionos.ch" class="top-link" target="_blank">
-            🌐 Site Web
-          </a>
-          <a href="https://discord.gg/cPs2pMR8nz" class="top-link" target="_blank">
-            💬 Discord
-          </a>
-          <a href="https://bot9000.snia.ch" class="top-link" target="_blank">
-            🤖 Bot9000
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Le header de new-api s'affichera automatiquement ici -->
-  
   <!-- PRIX BANNER - MEGA VISIBLE -->
   <div class="price-banner">
     <div class="container">
@@ -472,7 +364,17 @@
         <span class="bot-model">Kimi-K2</span>
         <span class="bot-model">GLM-4.5</span>
       </div>
-      <a href="https://bot9000.snia.ch" class="btn btn-primary" target="_blank">Accéder à Bot9000 →</a>
+      <div class="bot-actions">
+        <a href="https://scionos.ch" class="btn" target="_blank">
+          🌐 ScioNos.ch
+        </a>
+        <a href="https://bot9000.snia.ch" class="btn" target="_blank">
+          🤖 Bot9000
+        </a>
+        <a href="https://discord.gg/cPs2pMR8nz" class="btn" target="_blank">
+          💬 Discord
+        </a>
+      </div>
     </div>
 
     <!-- MODÈLES GRATUITS EN PREMIER -->
