@@ -301,7 +301,8 @@
     .gpt-oss { border-left-color: #10A37F; }
     .kimi { border-left-color: #FF9800; }
     .glm { border-left-color: #4CAF50; }
-
+    .minimax { border-left-color: #f97316; }
+ 
     .logo-deepseek { background: #1E88E5; }
     .logo-qwen { background: #9C27B0; }
     .logo-gpt { background: #10A37F; }
@@ -310,7 +311,8 @@
     .logo-gpt-oss { background: #10A37F; }
     .logo-kimi { background: #FF9800; }
     .logo-glm { background: #4CAF50; }
-
+    .logo-minimax { background: #f97316; }
+ 
     /* Footer */
     footer {
       background: var(--bg-card);
@@ -506,27 +508,15 @@
             </tr>
           </thead>
           <tbody>
+            <!-- CHANGEMENT: Contexte 400K -> 128K -->
             <tr class="featured">
               <td><strong>gpt-5-free</strong> <span class="badge-free">GRATUIT</span></td>
               <td class="center">✓</td>
               <td class="center">✓</td>
               <td class="center">✓</td>
-              <td class="context-value">400K</td>
-            </tr>
-            <tr>
-              <td><strong>deepseek-v3.1-free</strong> <span class="badge-free">GRATUIT</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
               <td class="context-value">128K</td>
             </tr>
-            <tr>
-              <td><strong>qwen3-next-80b-a3b-thinking-free</strong> <span class="badge-free">GRATUIT</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">256K</td>
-            </tr>
+            <!-- MODIFIÉ: Remplacement des anciens modèles par les nouveaux -->
             <tr>
               <td><strong>qwen3-coder-480b-a35b-instruct-free</strong> <span class="badge-free">GRATUIT</span></td>
               <td class="center">✓</td>
@@ -535,18 +525,25 @@
               <td class="context-value">256K</td>
             </tr>
             <tr>
-              <td><strong>gpt-oss-120b-free</strong> <span class="badge-free">GRATUIT</span></td>
+              <td><strong>minimax-m2-free</strong> <span class="badge-free">GRATUIT</span></td>
               <td class="center">✓</td>
               <td class="center">–</td>
               <td class="center">✓</td>
-              <td class="context-value">128K</td>
+              <td class="context-value">200K</td>
             </tr>
             <tr>
-              <td><strong>seed-oss-36b-instruct-free</strong> <span class="badge-free">GRATUIT</span></td>
+              <td><strong>kimi-k2-instruct-0905-free</strong> <span class="badge-free">GRATUIT</span></td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="center">–</td>
+              <td class="context-value">262K</td>
+            </tr>
+            <tr>
+              <td><strong>deepseek-v3.1-terminus-free</strong> <span class="badge-free">GRATUIT</span></td>
               <td class="center">✓</td>
               <td class="center">–</td>
               <td class="center">✓</td>
-              <td class="context-value">512K</td>
+              <td class="context-value">164K</td>
             </tr>
           </tbody>
         </table>
@@ -779,44 +776,6 @@
         </div>
         <div class="models-grid">
           <div class="model-card qwen">
-            <div class="model-name">Qwen3-Next-80B-A3B-Instruct</div>
-            <div class="model-id">qwen3-next-80b-a3b-instruct</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge no">–</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card qwen">
-            <div class="model-name">Qwen3-Next-80B-A3B-Thinking</div>
-            <div class="model-id">qwen3-next-80b-a3b-thinking</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card qwen">
             <div class="model-name">Qwen3-235B-A22B-Thinking-2507</div>
             <div class="model-id">qwen3-235b-a22b-thinking-2507</div>
             <div class="capabilities">
@@ -834,7 +793,7 @@
               </div>
             </div>
           </div>
-
+ 
           <div class="model-card qwen">
             <div class="model-name">Qwen3-235B-A22B-Instruct-2507</div>
             <div class="model-id">qwen3-235b-a22b-instruct-2507</div>
@@ -853,7 +812,7 @@
               </div>
             </div>
           </div>
-
+ 
           <div class="model-card qwen">
             <div class="model-name">Qwen3-Coder-480B-A35B-Instruct-Turbo</div>
             <div class="model-id">qwen3-coder-480b-a35b-instruct-turbo</div>
@@ -872,7 +831,7 @@
               </div>
             </div>
           </div>
-
+ 
           <div class="model-card qwen">
             <div class="model-name">Qwen3-Coder-480B-A35B-Instruct</div>
             <div class="model-id">qwen3-coder-480b-a35b-instruct</div>
@@ -966,23 +925,15 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- GLM -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-glm">GLM</div>
-          <div class="family-name">GLM (Z.AI)</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card glm">
-            <div class="model-name">GLM-4.6</div>
-            <div class="model-id">zai-org/glm-4.6</div>
+          <!-- Modèle Kimi-K2-Thinking ajouté -->
+          <div class="model-card kimi">
+            <div class="model-name">Kimi-K2-Thinking</div>
+            <div class="model-id">moonshotai/kimi-k2-thinking</div>
             <div class="capabilities">
               <div class="capability">
                 <span class="capability-label">Contexte</span>
-                <span class="capability-value">200K</span>
+                <span class="capability-value">256K</span>
               </div>
               <div class="capability">
                 <span class="capability-label">Vision</span>
@@ -996,7 +947,37 @@
           </div>
         </div>
       </div>
-
+ 
+      <!-- GLM (Z.AI) - Section supprimée -->
+ 
+      <!-- MiniMax - Nouvelle section ajoutée -->
+      <div class="family-section">
+        <div class="family-header">
+          <div class="family-logo logo-minimax">MM</div>
+          <div class="family-name">MiniMax</div>
+        </div>
+        <div class="models-grid">
+          <div class="model-card minimax">
+            <div class="model-name">MiniMax-M2</div>
+            <div class="model-id">minimax/minimax-m2</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">200K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge no">–</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Réflexion</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
     </section>
   </div>
 
