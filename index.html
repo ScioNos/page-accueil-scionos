@@ -22,6 +22,7 @@
       --text-muted: #94a3b8;
       --border: rgba(148, 163, 184, 0.1);
       --success: #10b981;
+      --warning: #f59e0b;
     }
 
     body {
@@ -151,7 +152,7 @@
     }
 
     .section-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 900;
       margin-bottom: 30px;
       display: flex;
@@ -163,8 +164,21 @@
       color: var(--success);
     }
 
+    .section-title.premium-free {
+      color: var(--accent);
+    }
+
     .section-title.premium {
       color: var(--primary);
+    }
+
+    .section-subtitle {
+      display: block;
+      font-size: 1rem;
+      font-weight: normal;
+      color: var(--text-muted);
+      margin-top: 5px;
+      margin-left: 5px;
     }
 
     /* Family Section */
@@ -405,6 +419,18 @@
       margin-left: 8px;
     }
 
+    .badge-account {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--accent);
+      color: white;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-left: 8px;
+    }
+
     .context-value {
       color: var(--accent);
       font-weight: 600;
@@ -418,6 +444,13 @@
       
       .section-title {
         font-size: 1.8rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-subtitle {
+        margin-left: 0;
+        margin-top: 5px;
       }
 
       .bot-actions {
@@ -440,12 +473,13 @@
   <!-- PRIX BANNER -->
   <div class="price-banner">
     <div class="container">
-      <h1>10$/mois</h1>
+      <h1>5$/mois</h1>
       <p class="subtitle">Accès illimité à 50+ modèles IA sur infrastructure B200</p>
       <div class="features">
         <div class="price-feature">
           <span>✓</span>
-          <span>5 modèles gratuits</span>
+          <!-- Correction: 5 modèles sans compte + 5 avec compte = 10 modèles gratuits -->
+          <span>10 modèles gratuits</span>
         </div>
         <div class="price-feature">
           <span>✓</span>
@@ -470,11 +504,10 @@
       <h2>🤖 Bot9000</h2>
       <p>Interface unifiée pour tous les modèles - Essayez maintenant</p>
       <div class="bot-models">
-        <span class="bot-model">GPT-5-Nano</span>
+        <span class="bot-model">Gemini 3 Pro</span>
         <span class="bot-model">GPT-5-Mini</span>
-        <span class="bot-model">Claude Opus</span>
-        <span class="bot-model">DeepSeek-V3.2</span>
-        <span class="bot-model">Gemini 2.5 Pro</span>
+        <span class="bot-model">Claude 4.5 Opus</span>
+        <!-- Doublon Gemini supprimé ici -->
         <span class="bot-model">Qwen3-235B</span>
         <span class="bot-model">Kimi-K2</span>
         <span class="bot-model">GLM-4.6</span>
@@ -492,9 +525,12 @@
       </div>
     </div>
 
-    <!-- MODÈLES GRATUITS -->
+    <!-- TABLE 1: MODÈLES OPEN SOURCE GRATUITS (SANS COMPTE) -->
     <section class="section">
-      <h2 class="section-title free">🆓 Modèles Gratuits</h2>
+      <h2 class="section-title free">
+        🆓 Modèles Open Source 
+        <span class="section-subtitle">(Gratuits, accessibles sans activation)</span>
+      </h2>
       
       <div class="table-wrapper">
         <table>
@@ -508,42 +544,99 @@
             </tr>
           </thead>
           <tbody>
-            <!-- CHANGEMENT: Contexte 400K -> 128K -->
-            <tr class="featured">
-              <td><strong>gpt-5-free</strong> <span class="badge-free">GRATUIT</span></td>
-              <td class="center">✓</td>
-              <td class="center">✓</td>
-              <td class="center">✓</td>
-              <td class="context-value">128K</td>
-            </tr>
-            <!-- MODIFIÉ: Remplacement des anciens modèles par les nouveaux -->
             <tr>
-              <td><strong>qwen3-coder-480b-a35b-instruct-free</strong> <span class="badge-free">GRATUIT</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">–</td>
-              <td class="context-value">256K</td>
-            </tr>
-            <tr>
-              <td><strong>minimax-m2-free</strong> <span class="badge-free">GRATUIT</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">200K</td>
-            </tr>
-            <tr>
-              <td><strong>kimi-k2-instruct-0905-free</strong> <span class="badge-free">GRATUIT</span></td>
+              <td><strong>kimi-k2-instruct-0905-free</strong> <span class="badge-free">SANS COMPTE</span></td>
               <td class="center">✓</td>
               <td class="center">–</td>
               <td class="center">–</td>
               <td class="context-value">262K</td>
             </tr>
             <tr>
-              <td><strong>deepseek-v3.1-terminus-free</strong> <span class="badge-free">GRATUIT</span></td>
+              <td><strong>qwen3-coder-480b-a35b-instruct-free</strong> <span class="badge-free">SANS COMPTE</span></td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="center">–</td>
+              <td class="context-value">256K</td>
+            </tr>
+            <tr>
+              <td><strong>minimax-m2-free</strong> <span class="badge-free">SANS COMPTE</span></td>
+              <td class="center">✓</td>
+              <td class="center">✓</td>
+              <td class="center">✓</td>
+              <td class="context-value">200K</td>
+            </tr>
+            <tr>
+              <td><strong>deepseek-v3.1-terminus-free</strong> <span class="badge-free">SANS COMPTE</span></td>
               <td class="center">✓</td>
               <td class="center">–</td>
               <td class="center">✓</td>
               <td class="context-value">164K</td>
+            </tr>
+            <tr class="featured">
+              <td><strong>mistral-large-2512-free</strong> <span class="badge-free">SANS COMPTE</span></td>
+              <td class="center">✓</td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="context-value">128K</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TABLE 2: MODÈLES PREMIUM GRATUITS (COMPTE REQUIS) -->
+    <section class="section">
+      <h2 class="section-title premium-free">
+        🔓 Modèles Premium Gratuits 
+        <span class="section-subtitle">(Activation du compte requise)</span>
+      </h2>
+      
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Modèle</th>
+              <th>Fonctions</th>
+              <th>Vision</th>
+              <th>Réflexion</th>
+              <th>Contexte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>deepseek-v3.2</strong> <span class="badge-account">COMPTE REQUIS</span></td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="center">✓</td>
+              <td class="context-value">160K</td>
+            </tr>
+            <tr>
+              <td><strong>deepseek-v3.1-terminus</strong> <span class="badge-account">COMPTE REQUIS</span></td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="center">✓</td>
+              <td class="context-value">160K</td>
+            </tr>
+            <tr>
+              <td><strong>minimax-m2</strong> <span class="badge-account">COMPTE REQUIS</span></td>
+              <td class="center">✓</td>
+              <td class="center">✓</td>
+              <td class="center">✓</td>
+              <td class="context-value">200K</td>
+            </tr>
+            <tr>
+              <td><strong>gpt-oss-120b</strong> <span class="badge-account">COMPTE REQUIS</span></td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="center">✓</td>
+              <td class="context-value">128K</td>
+            </tr>
+            <tr>
+              <td><strong>gpt-oss-20b</strong> <span class="badge-account">COMPTE REQUIS</span></td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="center">✓</td>
+              <td class="context-value">128K</td>
             </tr>
           </tbody>
         </table>
@@ -598,25 +691,6 @@
               </div>
             </div>
           </div>
-
-          <div class="model-card gpt">
-            <div class="model-name">GPT-5-Nano</div>
-            <div class="model-id">gpt-5-nano</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">400K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -628,8 +702,8 @@
         </div>
         <div class="models-grid">
           <div class="model-card claude">
-            <div class="model-name">Claude 4.1 Opus</div>
-            <div class="model-id">claude-4.1-opus</div>
+            <div class="model-name">Claude 4.5 Opus</div>
+            <div class="model-id">claude-4.5-opus</div>
             <div class="capabilities">
               <div class="capability">
                 <span class="capability-label">Contexte</span>
@@ -647,8 +721,27 @@
           </div>
 
           <div class="model-card claude">
-            <div class="model-name">Claude Sonnet 4.5</div>
+            <div class="model-name">Claude 4.5 Sonnet</div>
             <div class="model-id">claude-4.5-sonnet</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">200K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge yes">✓</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Fonctions</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="model-card claude">
+            <div class="model-name">Claude 4.5 Haiku</div>
+            <div class="model-id">claude-4.5-haiku</div>
             <div class="capabilities">
               <div class="capability">
                 <span class="capability-label">Contexte</span>
@@ -674,6 +767,25 @@
           <div class="family-name">Google Gemini</div>
         </div>
         <div class="models-grid">
+          <div class="model-card gemini">
+            <div class="model-name">Gemini 3 Pro Preview</div>
+            <div class="model-id">gemini-3-pro-preview</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">2M</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge yes">✓</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Fonctions</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+
           <div class="model-card gemini">
             <div class="model-name">Gemini 2.5 Pro</div>
             <div class="model-id">gemini-2.5-pro</div>
@@ -711,8 +823,34 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-
+      <!-- GLM (Réajouté) -->
+      <div class="family-section">
+        <div class="family-header">
+          <div class="family-logo logo-glm">GLM</div>
+          <div class="family-name">GLM (Z.AI)</div>
+        </div>
+        <div class="models-grid">
+          <div class="model-card glm">
+            <div class="model-name">GLM-4.6</div>
+            <div class="model-id">glm-4.6</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">200K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge no">–</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Fonctions</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -720,53 +858,6 @@
     <!-- OPEN SOURCE -->
     <section class="section">
       <h2 class="section-title premium">Open Source</h2>
-
-      <!-- DeepSeek -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-deepseek">DS</div>
-          <div class="family-name">DeepSeek</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card deepseek">
-            <div class="model-name">DeepSeek-V3.2-Exp</div>
-            <div class="model-id">deepseek-v3.2-exp</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">160K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card deepseek">
-            <div class="model-name">DeepSeek-V3.1-Terminus</div>
-            <div class="model-id">deepseek-v3.1-terminus</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">160K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Qwen -->
       <div class="family-section">
@@ -948,9 +1039,7 @@
         </div>
       </div>
  
-      <!-- GLM (Z.AI) - Section supprimée -->
- 
-      <!-- MiniMax - Nouvelle section ajoutée -->
+      <!-- MiniMax -->
       <div class="family-section">
         <div class="family-header">
           <div class="family-logo logo-minimax">MM</div>
@@ -985,7 +1074,7 @@
   <footer>
     <div class="container">
       <div class="footer-content">
-        <p class="footer-date">📅 Mis à jour le 18 novembre 2025</p>
+        <p class="footer-date">📅 Mis à jour le 9 décembre 2025</p>
         <p class="footer-date">© 2025 ScioNos - Infrastructure GPU B200</p>
       </div>
     </div>
