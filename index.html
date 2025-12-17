@@ -316,6 +316,7 @@
     .kimi { border-left-color: #FF9800; }
     .glm { border-left-color: #4CAF50; }
     .minimax { border-left-color: #f97316; }
+    .mistral { border-left-color: #f59e0b; }
  
     .logo-deepseek { background: #1E88E5; }
     .logo-qwen { background: #9C27B0; }
@@ -326,6 +327,7 @@
     .logo-kimi { background: #FF9800; }
     .logo-glm { background: #4CAF50; }
     .logo-minimax { background: #f97316; }
+    .logo-mistral { background: #f59e0b; }
  
     /* Footer */
     footer {
@@ -435,6 +437,19 @@
       color: var(--accent);
       font-weight: 600;
     }
+    
+    .rate-limit-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-left: 4px solid var(--warning);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      color: var(--text);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -478,8 +493,7 @@
       <div class="features">
         <div class="price-feature">
           <span>✓</span>
-          <!-- Correction: 5 modèles sans compte + 5 avec compte = 10 modèles gratuits -->
-          <span>10 modèles gratuits</span>
+          <span>11 modèles gratuits</span>
         </div>
         <div class="price-feature">
           <span>✓</span>
@@ -507,7 +521,6 @@
         <span class="bot-model">Gemini 3 Pro</span>
         <span class="bot-model">GPT-5-Mini</span>
         <span class="bot-model">Claude 4.5 Opus</span>
-        <!-- Doublon Gemini supprimé ici -->
         <span class="bot-model">Qwen3-235B</span>
         <span class="bot-model">Kimi-K2</span>
         <span class="bot-model">GLM-4.6</span>
@@ -519,7 +532,7 @@
         <a href="https://bot9000.snia.ch" class="btn" target="_blank">
           🤖 Bot9000
         </a>
-        <a href="https://discord.gg/cPs2pMR8nz" class="btn" target="_blank">
+        <a href="https://discord.gg/QyPhzPzB" class="btn" target="_blank">
           💬 Discord
         </a>
       </div>
@@ -532,6 +545,12 @@
         <span class="section-subtitle">(Gratuits, accessibles sans activation)</span>
       </h2>
       
+      <!-- Ajout de l'avertissement sur la limitation -->
+      <div class="rate-limit-warning">
+        <span>⚠️</span>
+        <strong>Pour les comptes qui ne sont pas activés, une limitation de 5 requêtes par minute est appliquée.</strong>
+      </div>
+
       <div class="table-wrapper">
         <table>
           <thead>
@@ -545,18 +564,18 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong>kimi-k2-instruct-0905-free</strong> <span class="badge-free">SANS COMPTE</span></td>
+              <td><strong>deepseek-v3.1-free</strong> <span class="badge-free">SANS COMPTE</span></td>
               <td class="center">✓</td>
               <td class="center">–</td>
-              <td class="center">–</td>
-              <td class="context-value">262K</td>
+              <td class="center">✓</td>
+              <td class="context-value">164K</td>
             </tr>
             <tr>
-              <td><strong>qwen3-coder-480b-a35b-instruct-free</strong> <span class="badge-free">SANS COMPTE</span></td>
+              <td><strong>deepseek-v3.1-terminus-free</strong> <span class="badge-free">SANS COMPTE</span></td>
               <td class="center">✓</td>
               <td class="center">–</td>
-              <td class="center">–</td>
-              <td class="context-value">256K</td>
+              <td class="center">✓</td>
+              <td class="context-value">164K</td>
             </tr>
             <tr>
               <td><strong>minimax-m2-free</strong> <span class="badge-free">SANS COMPTE</span></td>
@@ -566,18 +585,25 @@
               <td class="context-value">200K</td>
             </tr>
             <tr>
-              <td><strong>deepseek-v3.1-terminus-free</strong> <span class="badge-free">SANS COMPTE</span></td>
+              <td><strong>kimi-k2-instruct-0905-free</strong> <span class="badge-free">SANS COMPTE</span></td>
               <td class="center">✓</td>
               <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">164K</td>
+              <td class="center">–</td>
+              <td class="context-value">262K</td>
             </tr>
             <tr class="featured">
+              <td><strong>qwen3-coder-480b-a35b-instruct-free</strong> <span class="badge-free">SANS COMPTE</span></td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="center">–</td>
+              <td class="context-value">256K</td>
+            </tr>
+            <tr>
               <td><strong>mistral-large-2512-free</strong> <span class="badge-free">SANS COMPTE</span></td>
               <td class="center">✓</td>
               <td class="center">✓</td>
               <td class="center">–</td>
-              <td class="context-value">128K</td>
+              <td class="context-value">262K</td>
             </tr>
           </tbody>
         </table>
@@ -637,6 +663,20 @@
               <td class="center">–</td>
               <td class="center">✓</td>
               <td class="context-value">128K</td>
+            </tr>
+            <tr>
+              <td><strong>devstral-2-123b-instruct-2512</strong> <span class="badge-account">COMPTE REQUIS</span></td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="center">–</td>
+              <td class="context-value">262K</td>
+            </tr>
+            <tr>
+              <td><strong>mistral-large-3-675b-instruct-2512</strong> <span class="badge-account">COMPTE REQUIS</span></td>
+              <td class="center">✓</td>
+              <td class="center">✓</td>
+              <td class="center">–</td>
+              <td class="context-value">262K</td>
             </tr>
           </tbody>
         </table>
@@ -825,8 +865,87 @@
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- GLM (Réajouté) -->
+    <!-- OPEN SOURCE -->
+    <section class="section">
+      <h2 class="section-title premium">Open Source</h2>
+
+      <!-- DeepSeek -->
+      <div class="family-section">
+        <div class="family-header">
+          <div class="family-logo logo-deepseek">DS</div>
+          <div class="family-name">DeepSeek</div>
+        </div>
+        <div class="models-grid">
+          <div class="model-card deepseek">
+            <div class="model-name">DeepSeek-V3.2</div>
+            <div class="model-id">deepseek-v3.2</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">160K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge no">–</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Réflexion</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+          <div class="model-card deepseek">
+            <div class="model-name">DeepSeek-V3.1-Terminus</div>
+            <div class="model-id">deepseek-v3.1-terminus</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">160K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge no">–</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Réflexion</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MiniMax -->
+      <div class="family-section">
+        <div class="family-header">
+          <div class="family-logo logo-minimax">MM</div>
+          <div class="family-name">MiniMax</div>
+        </div>
+        <div class="models-grid">
+          <div class="model-card minimax">
+            <div class="model-name">MiniMax-M2</div>
+            <div class="model-id">minimax-m2</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">200K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge yes">✓</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Réflexion</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GLM -->
       <div class="family-section">
         <div class="family-header">
           <div class="family-logo logo-glm">GLM</div>
@@ -853,11 +972,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- OPEN SOURCE -->
-    <section class="section">
-      <h2 class="section-title premium">Open Source</h2>
 
       <!-- Qwen -->
       <div class="family-section">
@@ -866,6 +980,25 @@
           <div class="family-name">Qwen (Alibaba)</div>
         </div>
         <div class="models-grid">
+          <div class="model-card qwen">
+            <div class="model-name">Qwen3-235B-A22B-Instruct-2507</div>
+            <div class="model-id">qwen3-235b-a22b-instruct-2507</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">256K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge no">–</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Réflexion</span>
+                <span class="badge no">–</span>
+              </div>
+            </div>
+          </div>
+ 
           <div class="model-card qwen">
             <div class="model-name">Qwen3-235B-A22B-Thinking-2507</div>
             <div class="model-id">qwen3-235b-a22b-thinking-2507</div>
@@ -886,8 +1019,8 @@
           </div>
  
           <div class="model-card qwen">
-            <div class="model-name">Qwen3-235B-A22B-Instruct-2507</div>
-            <div class="model-id">qwen3-235b-a22b-instruct-2507</div>
+            <div class="model-name">Qwen3-Coder-480B-A35B-Instruct</div>
+            <div class="model-id">qwen3-coder-480b-a35b-instruct</div>
             <div class="capabilities">
               <div class="capability">
                 <span class="capability-label">Contexte</span>
@@ -922,10 +1055,38 @@
               </div>
             </div>
           </div>
- 
-          <div class="model-card qwen">
-            <div class="model-name">Qwen3-Coder-480B-A35B-Instruct</div>
-            <div class="model-id">qwen3-coder-480b-a35b-instruct</div>
+        </div>
+      </div>
+
+      <!-- Kimi -->
+      <div class="family-section">
+        <div class="family-header">
+          <div class="family-logo logo-kimi">K</div>
+          <div class="family-name">Kimi (Moonshot AI)</div>
+        </div>
+        <div class="models-grid">
+          <div class="model-card kimi">
+            <div class="model-name">Kimi-K2-Instruct-0905</div>
+            <div class="model-id">moonshotai/kimi-k2-instruct-0905</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">256K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge no">–</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Fonctions</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="model-card kimi">
+            <div class="model-name">Kimi-K2-Thinking</div>
+            <div class="model-id">moonshotai/kimi-k2-thinking</div>
             <div class="capabilities">
               <div class="capability">
                 <span class="capability-label">Contexte</span>
@@ -937,7 +1098,53 @@
               </div>
               <div class="capability">
                 <span class="capability-label">Réflexion</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mistral / Devstral -->
+      <div class="family-section">
+        <div class="family-header">
+          <div class="family-logo logo-mistral">M</div>
+          <div class="family-name">Mistral AI / Devstral</div>
+        </div>
+        <div class="models-grid">
+          <div class="model-card mistral">
+            <div class="model-name">devstral-2-123b-instruct-2512</div>
+            <div class="model-id">devstral-2-123b-instruct-2512</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">262K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
                 <span class="badge no">–</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Fonctions</span>
+                <span class="badge yes">✓</span>
+              </div>
+            </div>
+          </div>
+          <div class="model-card mistral">
+            <div class="model-name">mistral-large-3-675b-instruct-2512</div>
+            <div class="model-id">mistral-large-3-675b-instruct-2512</div>
+            <div class="capabilities">
+              <div class="capability">
+                <span class="capability-label">Contexte</span>
+                <span class="capability-value">262K</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Vision</span>
+                <span class="badge yes">✓</span>
+              </div>
+              <div class="capability">
+                <span class="capability-label">Fonctions</span>
+                <span class="badge yes">✓</span>
               </div>
             </div>
           </div>
@@ -991,82 +1198,6 @@
         </div>
       </div>
 
-      <!-- Kimi -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-kimi">K</div>
-          <div class="family-name">Kimi (Moonshot AI)</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card kimi">
-            <div class="model-name">Kimi-K2-Instruct-0905</div>
-            <div class="model-id">moonshotai/kimi-k2-instruct-0905</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Modèle Kimi-K2-Thinking ajouté -->
-          <div class="model-card kimi">
-            <div class="model-name">Kimi-K2-Thinking</div>
-            <div class="model-id">moonshotai/kimi-k2-thinking</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
- 
-      <!-- MiniMax -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-minimax">MM</div>
-          <div class="family-name">MiniMax</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card minimax">
-            <div class="model-name">MiniMax-M2</div>
-            <div class="model-id">minimax/minimax-m2</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">200K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
- 
     </section>
   </div>
 
@@ -1074,7 +1205,7 @@
   <footer>
     <div class="container">
       <div class="footer-content">
-        <p class="footer-date">📅 Mis à jour le 9 décembre 2025</p>
+        <p class="footer-date">📅 Mis à jour le 17 décembre 2025</p>
         <p class="footer-date">© 2025 ScioNos - Infrastructure GPU B200</p>
       </div>
     </div>
