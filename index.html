@@ -1,1214 +1,801 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScioNos - Modèles IA Disponibles</title>
+  <title>ScioNos - Unified AI Gateway</title>
+  <meta name="description" content="ScioNos is a unified AI API gateway for routing, monitoring, and managing access to multiple AI providers from one secure console." />
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     :root {
-      /* Couleurs ScioNos.ch */
-      --primary: #3b82f6;
-      --secondary: #a855f7;
-      --accent: #f97316;
-      --bg-dark: #0b0f1a;
-      --bg-card: #0a1022;
-      --text: #e8e8e8;
-      --text-muted: #94a3b8;
-      --border: rgba(148, 163, 184, 0.1);
-      --success: #10b981;
-      --warning: #f59e0b;
+      --background: #ffffff;
+      --foreground: #09090b;
+      --muted: #f5f5f5;
+      --muted-2: #fafafa;
+      --muted-foreground: #64646f;
+      --border: #e8e8ec;
+      --border-soft: rgba(9, 9, 11, 0.08);
+      --primary: #070707;
+      --primary-foreground: #ffffff;
+      --blue: #3080ff;
+      --blue-soft: rgba(48, 128, 255, 0.1);
+      --violet: #8d54ff;
+      --purple: #ac4bff;
+      --emerald: #00bb7f;
+      --amber: #b75000;
+      --shadow-soft: 0 24px 70px -40px rgba(15, 23, 42, 0.35);
+      --shadow-card: 0 18px 50px -35px rgba(15, 23, 42, 0.28);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --max: 1120px;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text);
-      line-height: 1.6;
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 720px;
+      pointer-events: none;
+      background:
+        radial-gradient(60% 50% at 18% 14%, rgba(48, 128, 255, 0.18), transparent 68%),
+        radial-gradient(46% 38% at 82% 12%, rgba(141, 84, 255, 0.16), transparent 72%),
+        radial-gradient(42% 34% at 44% 70%, rgba(172, 75, 255, 0.08), transparent 72%);
+      z-index: 0;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 660px;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(9, 9, 11, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(9, 9, 11, 0.06) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 28%, black 18%, transparent 100%);
+      opacity: 0.45;
+      z-index: 0;
     }
 
     .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 20px;
+      width: min(100% - 32px, var(--max));
+      margin-inline: auto;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Prix Banner */
-    .price-banner {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      padding: 40px 20px;
-      text-align: center;
-      margin-bottom: 40px;
-      margin-top: 0;
-    }
-
-    .price-banner h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
-      color: white;
-      margin-bottom: 10px;
-    }
-
-    .price-banner .subtitle {
-      font-size: 1.3rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 20px;
-    }
-
-    .price-banner .features {
-      display: flex;
-      gap: 30px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 25px;
-    }
-
-    .price-feature {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: white;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    /* Bot9000 */
-    .bot-section {
-      background: rgba(59, 130, 246, 0.05);
-      border: 2px solid rgba(59, 130, 246, 0.2);
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 50px;
+    .hero {
+      padding: 112px 0 70px;
       text-align: center;
     }
 
-    .bot-section h2 {
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-
-    .bot-section p {
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .bot-models {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .bot-model {
-      padding: 8px 16px;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      border-radius: 20px;
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-
-    .bot-actions {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 25px;
-    }
-
-    .btn {
+    .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 28px;
-      border-radius: 8px;
-      text-decoration: none;
+      padding: 7px 12px;
+      border: 1px solid var(--border-soft);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--muted-foreground);
+      font-size: 12px;
       font-weight: 600;
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
-      font-size: 1rem;
-      background: var(--primary);
-      color: white;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
     }
 
-    .btn:hover {
-      background: #2563eb;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--emerald);
+      box-shadow: 0 0 16px rgba(0, 187, 127, 0.65);
     }
 
-    /* Sections */
-    .section {
-      margin-bottom: 60px;
+    h1 {
+      max-width: 790px;
+      margin: 24px auto 0;
+      font-size: clamp(2.35rem, 6vw, 4.25rem);
+      line-height: 1.05;
+      letter-spacing: -0.055em;
+      font-weight: 800;
     }
 
-    .section-title {
-      font-size: 2.2rem;
-      font-weight: 900;
-      margin-bottom: 30px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
+    .gradient-text {
+      background: linear-gradient(90deg, var(--blue), var(--violet), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .section-title.free {
-      color: var(--success);
+    .hero-text {
+      max-width: 680px;
+      margin: 22px auto 0;
+      color: rgba(100, 100, 111, 0.92);
+      font-size: clamp(1rem, 2vw, 1.16rem);
     }
 
-    .section-title.premium-free {
-      color: var(--accent);
-    }
-
-    .section-title.premium {
-      color: var(--primary);
-    }
-
-    .section-subtitle {
-      display: block;
-      font-size: 1rem;
-      font-weight: normal;
-      color: var(--text-muted);
-      margin-top: 5px;
-      margin-left: 5px;
-    }
-
-    /* Family Section */
-    .family-section {
-      margin-bottom: 40px;
-    }
-
-    .family-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      padding: 20px 30px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-    }
-
-    .family-logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
+    .hero-actions {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      font-size: 1.3em;
-      color: white;
-      flex-shrink: 0;
+      gap: 14px;
+      margin-top: 34px;
+      flex-wrap: wrap;
     }
 
-    .family-name {
-      font-size: 1.5em;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    /* Grid de modèles */
-    .models-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-    }
-
-    .model-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 42px;
+      padding: 0 18px;
       border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-      border-left: 5px solid;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 650;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.75);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--foreground);
+      border-color: var(--border-soft);
+      backdrop-filter: blur(14px);
+    }
+
+    .button.secondary:hover {
+      border-color: rgba(48, 128, 255, 0.28);
+      background: rgba(48, 128, 255, 0.045);
+    }
+
+    .note {
+      margin-top: 16px;
+      color: rgba(100, 100, 111, 0.82);
+      font-size: 13px;
+    }
+
+    .showcase {
+      margin: 46px auto 0;
+      max-width: 760px;
+      border: 1px solid rgba(9, 9, 11, 0.1);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      text-align: left;
+      backdrop-filter: blur(18px);
+    }
+
+    .tabs {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--border);
+      min-height: 46px;
     }
 
-    .model-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-      border-color: rgba(148, 163, 184, 0.3);
+    .tab {
+      padding: 14px 12px 12px;
+      color: rgba(9, 9, 11, 0.42);
+      font-size: 12px;
+      font-weight: 650;
+      border-bottom: 2px solid transparent;
     }
 
-    .model-name {
-      font-size: 1.2em;
+    .tab.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    .ok {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(9, 9, 11, 0.42);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 10px;
       font-weight: 700;
-      color: var(--text);
-      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
-    .model-id {
-      color: var(--text-muted);
-      font-size: 0.85em;
-      font-family: 'Courier New', monospace;
+    .endpoint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(250, 250, 250, 0.58);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+    }
+
+    .method {
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-radius: 8px;
+      padding: 3px 7px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .code-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      min-height: 260px;
+    }
+
+    .panel {
+      padding: 20px 22px;
+    }
+
+    .panel + .panel {
+      border-left: 1px solid var(--border);
+      background: rgba(245, 245, 245, 0.52);
+    }
+
+    .panel-label {
+      margin-bottom: 12px;
+      color: rgba(9, 9, 11, 0.34);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: rgba(9, 9, 11, 0.72);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.65;
+    }
+
+    .blue { color: var(--blue); }
+    .violet { color: var(--violet); }
+    .amber { color: var(--amber); }
+    .green { color: #008a62; }
+
+    .metrics {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding: 12px 22px;
+      background: rgba(245, 245, 245, 0.72);
+      color: rgba(9, 9, 11, 0.46);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      flex-wrap: wrap;
+    }
+
+    .section {
+      padding: 86px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section.border-top {
+      border-top: 1px solid rgba(9, 9, 11, 0.08);
+    }
+
+    .section-head {
+      max-width: 620px;
+      margin-bottom: 36px;
+    }
+
+    .section-kicker {
+      color: var(--muted-foreground);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(1.85rem, 4vw, 2.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .section-description {
+      margin-top: 14px;
+      color: var(--muted-foreground);
+      font-size: 15.5px;
+      max-width: 620px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--border);
+      box-shadow: var(--shadow-card);
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 26px 18px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(1.7rem, 3vw, 2.15rem);
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted-foreground);
+      font-size: 12.5px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    .feature-card {
+      position: relative;
+      min-height: 230px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #ffffff, #fbfbfc);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -45% 30%;
+      height: 160px;
+      background: radial-gradient(circle, rgba(48, 128, 255, 0.11), transparent 62%);
+      pointer-events: none;
+    }
+
+    .feature-card.wide {
+      grid-column: span 1;
+    }
+
+    .feature-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--muted);
+      color: var(--muted-foreground);
+      font-size: 11px;
+      font-weight: 800;
       margin-bottom: 18px;
     }
 
-    .capabilities {
+    h3 {
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-bottom: 9px;
+    }
+
+    .feature-card p,
+    .step p,
+    .mini-card p {
+      color: var(--muted-foreground);
+      font-size: 14.5px;
+    }
+
+    .chips {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex-grow: 1;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+      position: relative;
+      z-index: 1;
     }
 
-    .capability {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-      font-size: 0.9em;
-    }
-
-    .capability:last-child {
-      border-bottom: none;
-    }
-
-    .capability-label {
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .capability-value {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      font-size: 0.85em;
-      font-weight: 700;
-    }
-
-    .badge.yes {
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--success);
-    }
-
-    .badge.no {
-      background: rgba(148, 163, 184, 0.1);
-      color: var(--text-muted);
-    }
-
-    /* Couleurs des familles */
-    .deepseek { border-left-color: #1E88E5; }
-    .qwen { border-left-color: #9C27B0; }
-    .gpt { border-left-color: #10A37F; }
-    .claude { border-left-color: #D97757; }
-    .gemini { border-left-color: #4285F4; }
-    .gpt-oss { border-left-color: #10A37F; }
-    .kimi { border-left-color: #FF9800; }
-    .glm { border-left-color: #4CAF50; }
-    .minimax { border-left-color: #f97316; }
-    .mistral { border-left-color: #f59e0b; }
- 
-    .logo-deepseek { background: #1E88E5; }
-    .logo-qwen { background: #9C27B0; }
-    .logo-gpt { background: #10A37F; }
-    .logo-claude { background: #D97757; }
-    .logo-gemini { background: #4285F4; }
-    .logo-gpt-oss { background: #10A37F; }
-    .logo-kimi { background: #FF9800; }
-    .logo-glm { background: #4CAF50; }
-    .logo-minimax { background: #f97316; }
-    .logo-mistral { background: #f59e0b; }
- 
-    /* Footer */
-    footer {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-      margin-top: 80px;
-      text-align: center;
-    }
-
-    .footer-content {
-      color: var(--text-muted);
-    }
-
-    .footer-date {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin: 5px 0;
-    }
-
-    /* Table Styles */
-    .table-wrapper {
-      background: var(--bg-card);
+    .chip {
+      padding: 8px 12px;
       border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 30px;
+      border-radius: 999px;
+      background: rgba(245, 245, 245, 0.62);
+      color: rgba(9, 9, 11, 0.68);
+      font-size: 12px;
+      font-weight: 650;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 18px;
     }
 
-    th {
-      background: rgba(59, 130, 246, 0.1);
-      padding: 16px;
-      text-align: left;
-      font-weight: 700;
-      color: var(--primary);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 2px solid var(--border);
+    .mini-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 22px;
+      box-shadow: 0 16px 42px -36px rgba(15, 23, 42, 0.32);
     }
 
-    td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.95rem;
+    .icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--muted-2);
+      color: var(--blue);
+      font-weight: 900;
+      margin-bottom: 16px;
     }
 
-    tr:hover {
-      background: rgba(59, 130, 246, 0.03);
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 34px;
     }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    td.center {
+    .step {
       text-align: center;
-      color: var(--success);
-      font-weight: 600;
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #ffffff, #fbfbfc);
     }
 
-    tr.featured {
-      background: rgba(168, 85, 247, 0.1);
-      border-top: 2px solid var(--secondary);
-      border-bottom: 2px solid var(--secondary);
+    .step-icon {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: var(--muted);
+      border: 1px solid var(--border);
+      color: var(--foreground);
+      font-size: 24px;
+      font-weight: 850;
     }
 
-    tr.featured td {
-      font-weight: 600;
-      color: var(--secondary);
+    .step-index {
+      position: absolute;
+      top: -9px;
+      right: -9px;
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--foreground);
+      color: var(--background);
+      font-size: 12px;
+      font-weight: 800;
     }
 
-    tr.featured td:first-child {
-      color: var(--secondary);
+    .final {
+      padding: 72px 0 90px;
+      text-align: center;
     }
 
-    .badge-free {
-      display: inline-block;
-      padding: 4px 10px;
-      background: var(--success);
-      color: white;
-      border-radius: 12px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-left: 8px;
+    .final-card {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 38px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background:
+        radial-gradient(70% 80% at 50% 0%, rgba(48, 128, 255, 0.12), transparent 70%),
+        linear-gradient(180deg, #ffffff, #fafafa);
+      box-shadow: var(--shadow-soft);
     }
 
-    .badge-account {
-      display: inline-block;
-      padding: 4px 10px;
-      background: var(--accent);
-      color: white;
-      border-radius: 12px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-left: 8px;
+    .final-card p {
+      max-width: 650px;
+      margin: 14px auto 0;
+      color: var(--muted-foreground);
     }
 
-    .context-value {
-      color: var(--accent);
-      font-weight: 600;
-    }
-    
-    .rate-limit-warning {
-      background: rgba(245, 158, 11, 0.1);
-      border-left: 4px solid var(--warning);
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      color: var(--text);
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .price-banner h1 {
-        font-size: 2.5rem;
+    @media (max-width: 900px) {
+      .code-grid,
+      .feature-grid,
+      .mini-grid,
+      .steps,
+      .stats {
+        grid-template-columns: 1fr;
       }
-      
-      .section-title {
-        font-size: 1.8rem;
+
+      .panel + .panel {
+        border-left: 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .hero {
+        padding-top: 82px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .hero-actions {
         flex-direction: column;
-        align-items: flex-start;
       }
 
-      .section-subtitle {
-        margin-left: 0;
-        margin-top: 5px;
-      }
-
-      .bot-actions {
-        flex-direction: column;
+      .button {
         width: 100%;
       }
 
-      .btn {
-        width: 100%;
-        justify-content: center;
+      .tabs {
+        overflow-x: auto;
       }
 
-      .family-header {
-        flex-wrap: wrap;
+      .feature-card,
+      .mini-card,
+      .step,
+      .final-card {
+        padding: 22px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- PRIX BANNER -->
-  <div class="price-banner">
-    <div class="container">
-      <h1>5$/mois</h1>
-      <p class="subtitle">Accès illimité à 50+ modèles IA sur infrastructure B200</p>
-      <div class="features">
-        <div class="price-feature">
-          <span>✓</span>
-          <span>11 modèles gratuits</span>
+  <main class="page">
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow"><span class="status-dot"></span> Self-hosted AI infrastructure</div>
+        <h1>One gateway for <span class="gradient-text">all your AI traffic</span></h1>
+        <p class="hero-text">
+          ScioNos brings your AI providers, API keys, quotas, routing rules, logs, and usage analytics into a single secure control plane powered by new-api.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="/dashboard">Open Console <span aria-hidden="true">→</span></a>
+          <a class="button secondary" href="https://docs.newapi.pro/" target="_blank" rel="noopener noreferrer">Read Documentation</a>
         </div>
-        <div class="price-feature">
-          <span>✓</span>
-          <span>Modèles premium illimités</span>
-        </div>
-        <div class="price-feature">
-          <span>✓</span>
-          <span>API compatible OpenAI</span>
-        </div>
-        <div class="price-feature">
-          <span>✓</span>
-          <span>GPU B200</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Container Principal -->
-  <div class="container">
-    <!-- Bot9000 Section -->
-    <div class="bot-section">
-      <h2>🤖 Bot9000</h2>
-      <p>Interface unifiée pour tous les modèles - Essayez maintenant</p>
-      <div class="bot-models">
-        <span class="bot-model">Gemini 3 Pro</span>
-        <span class="bot-model">GPT-5-Mini</span>
-        <span class="bot-model">Claude 4.5 Opus</span>
-        <span class="bot-model">Qwen3-235B</span>
-        <span class="bot-model">Kimi-K2</span>
-        <span class="bot-model">GLM-4.6</span>
-      </div>
-      <div class="bot-actions">
-        <a href="https://scionos.ch" class="btn" target="_blank">
-          🌐 ScioNos.ch
-        </a>
-        <a href="https://bot9000.snia.ch" class="btn" target="_blank">
-          🤖 Bot9000
-        </a>
-        <a href="https://discord.gg/QyPhzPzB" class="btn" target="_blank">
-          💬 Discord
-        </a>
-      </div>
-    </div>
-
-    <!-- TABLE 1: MODÈLES OPEN SOURCE GRATUITS (SANS COMPTE) -->
-    <section class="section">
-      <h2 class="section-title free">
-        🆓 Modèles Open Source 
-        <span class="section-subtitle">(Gratuits, accessibles sans activation)</span>
-      </h2>
-      
-      <!-- Ajout de l'avertissement sur la limitation -->
-      <div class="rate-limit-warning">
-        <span>⚠️</span>
-        <strong>Pour les comptes qui ne sont pas activés, une limitation de 5 requêtes par minute est appliquée.</strong>
-      </div>
-
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Modèle</th>
-              <th>Fonctions</th>
-              <th>Vision</th>
-              <th>Réflexion</th>
-              <th>Contexte</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>deepseek-v3.1-free</strong> <span class="badge-free">SANS COMPTE</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">164K</td>
-            </tr>
-            <tr>
-              <td><strong>deepseek-v3.1-terminus-free</strong> <span class="badge-free">SANS COMPTE</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">164K</td>
-            </tr>
-            <tr>
-              <td><strong>minimax-m2-free</strong> <span class="badge-free">SANS COMPTE</span></td>
-              <td class="center">✓</td>
-              <td class="center">✓</td>
-              <td class="center">✓</td>
-              <td class="context-value">200K</td>
-            </tr>
-            <tr>
-              <td><strong>kimi-k2-instruct-0905-free</strong> <span class="badge-free">SANS COMPTE</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">–</td>
-              <td class="context-value">262K</td>
-            </tr>
-            <tr class="featured">
-              <td><strong>qwen3-coder-480b-a35b-instruct-free</strong> <span class="badge-free">SANS COMPTE</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">–</td>
-              <td class="context-value">256K</td>
-            </tr>
-            <tr>
-              <td><strong>mistral-large-2512-free</strong> <span class="badge-free">SANS COMPTE</span></td>
-              <td class="center">✓</td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="context-value">262K</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- TABLE 2: MODÈLES PREMIUM GRATUITS (COMPTE REQUIS) -->
-    <section class="section">
-      <h2 class="section-title premium-free">
-        🔓 Modèles Premium Gratuits 
-        <span class="section-subtitle">(Activation du compte requise)</span>
-      </h2>
-      
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Modèle</th>
-              <th>Fonctions</th>
-              <th>Vision</th>
-              <th>Réflexion</th>
-              <th>Contexte</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>deepseek-v3.2</strong> <span class="badge-account">COMPTE REQUIS</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">160K</td>
-            </tr>
-            <tr>
-              <td><strong>deepseek-v3.1-terminus</strong> <span class="badge-account">COMPTE REQUIS</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">160K</td>
-            </tr>
-            <tr>
-              <td><strong>minimax-m2</strong> <span class="badge-account">COMPTE REQUIS</span></td>
-              <td class="center">✓</td>
-              <td class="center">✓</td>
-              <td class="center">✓</td>
-              <td class="context-value">200K</td>
-            </tr>
-            <tr>
-              <td><strong>gpt-oss-120b</strong> <span class="badge-account">COMPTE REQUIS</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">128K</td>
-            </tr>
-            <tr>
-              <td><strong>gpt-oss-20b</strong> <span class="badge-account">COMPTE REQUIS</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">✓</td>
-              <td class="context-value">128K</td>
-            </tr>
-            <tr>
-              <td><strong>devstral-2-123b-instruct-2512</strong> <span class="badge-account">COMPTE REQUIS</span></td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="center">–</td>
-              <td class="context-value">262K</td>
-            </tr>
-            <tr>
-              <td><strong>mistral-large-3-675b-instruct-2512</strong> <span class="badge-account">COMPTE REQUIS</span></td>
-              <td class="center">✓</td>
-              <td class="center">✓</td>
-              <td class="center">–</td>
-              <td class="context-value">262K</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- MODÈLES PREMIUM -->
-    <section class="section">
-      <h2 class="section-title premium">⚡ Modèles Premium</h2>
-
-      <!-- OpenAI GPT -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-gpt">GPT</div>
-          <div class="family-name">OpenAI GPT</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card gpt">
-            <div class="model-name">GPT-5</div>
-            <div class="model-id">gpt-5</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">400K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
+        <div class="showcase" aria-label="API gateway example">
+          <div class="tabs">
+            <span class="tab">Chat</span>
+            <span class="tab">Responses</span>
+            <span class="tab active">Messages</span>
+            <span class="tab">Embeddings</span>
+            <span class="ok"><span class="status-dot"></span> 200 OK</span>
+          </div>
+          <div class="endpoint"><span class="method">POST</span><span>/v1/messages</span></div>
+          <div class="code-grid">
+            <div class="panel">
+              <div class="panel-label">Request</div>
+              <pre><span class="green">curl</span> <span class="blue">-X POST</span> <span class="amber">"/v1/messages"</span> \
+  <span class="blue">-H</span> <span class="amber">"Authorization: Bearer sk-••••"</span> \
+  <span class="blue">-H</span> <span class="amber">"Content-Type: application/json"</span> \
+  <span class="blue">-d</span> '{
+    <span class="blue">"model"</span>: <span class="amber">"your-model"</span>,
+    <span class="blue">"messages"</span>: [
+      { <span class="blue">"role"</span>: <span class="amber">"user"</span>, <span class="blue">"content"</span>: <span class="amber">"Hello"</span> }
+    ]
+  }'</pre>
+            </div>
+            <div class="panel">
+              <div class="panel-label">Response</div>
+              <pre>{
+  <span class="blue">"status"</span>: <span class="amber">"routed"</span>,
+  <span class="blue">"provider"</span>: <span class="amber">"auto"</span>,
+  <span class="blue">"latency_ms"</span>: <span class="violet">156</span>,
+  <span class="blue">"usage"</span>: {
+    <span class="blue">"tokens"</span>: <span class="violet">29</span>,
+    <span class="blue">"cost"</span>: <span class="amber">"$0.00087"</span>
+  }
+}</pre>
             </div>
           </div>
-
-          <div class="model-card gpt">
-            <div class="model-name">GPT-5-Mini</div>
-            <div class="model-id">gpt-5-mini</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">400K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Anthropic Claude -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-claude">C</div>
-          <div class="family-name">Anthropic Claude</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card claude">
-            <div class="model-name">Claude 4.5 Opus</div>
-            <div class="model-id">claude-4.5-opus</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">200K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card claude">
-            <div class="model-name">Claude 4.5 Sonnet</div>
-            <div class="model-id">claude-4.5-sonnet</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">200K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card claude">
-            <div class="model-name">Claude 4.5 Haiku</div>
-            <div class="model-id">claude-4.5-haiku</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">200K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Google Gemini -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-gemini">G</div>
-          <div class="family-name">Google Gemini</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card gemini">
-            <div class="model-name">Gemini 3 Pro Preview</div>
-            <div class="model-id">gemini-3-pro-preview</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">2M</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card gemini">
-            <div class="model-name">Gemini 2.5 Pro</div>
-            <div class="model-id">gemini-2.5-pro</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">1.04M</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card gemini">
-            <div class="model-name">Gemini 2.5 Flash</div>
-            <div class="model-id">gemini-2.5-flash</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">1.04M</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
+          <div class="metrics">
+            <span>156 ms latency</span>
+            <span>29 tokens</span>
+            <span>stream · sse</span>
+            <span>cost tracked</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- OPEN SOURCE -->
-    <section class="section">
-      <h2 class="section-title premium">Open Source</h2>
-
-      <!-- DeepSeek -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-deepseek">DS</div>
-          <div class="family-name">DeepSeek</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card deepseek">
-            <div class="model-name">DeepSeek-V3.2</div>
-            <div class="model-id">deepseek-v3.2</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">160K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-          <div class="model-card deepseek">
-            <div class="model-name">DeepSeek-V3.1-Terminus</div>
-            <div class="model-id">deepseek-v3.1-terminus</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">160K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
+    <section class="section border-top">
+      <div class="container">
+        <div class="stats" aria-label="Platform highlights">
+          <div class="stat"><strong>50+</strong><span>upstream services</span></div>
+          <div class="stat"><strong>100+</strong><span>billing profiles</span></div>
+          <div class="stat"><strong>50+</strong><span>compatible routes</span></div>
+          <div class="stat"><strong>10+</strong><span>control modules</span></div>
         </div>
       </div>
-
-      <!-- MiniMax -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-minimax">MM</div>
-          <div class="family-name">MiniMax</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card minimax">
-            <div class="model-name">MiniMax-M2</div>
-            <div class="model-id">minimax-m2</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">200K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- GLM -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-glm">GLM</div>
-          <div class="family-name">GLM (Z.AI)</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card glm">
-            <div class="model-name">GLM-4.6</div>
-            <div class="model-id">glm-4.6</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">200K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Qwen -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-qwen">Q</div>
-          <div class="family-name">Qwen (Alibaba)</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card qwen">
-            <div class="model-name">Qwen3-235B-A22B-Instruct-2507</div>
-            <div class="model-id">qwen3-235b-a22b-instruct-2507</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge no">–</span>
-              </div>
-            </div>
-          </div>
- 
-          <div class="model-card qwen">
-            <div class="model-name">Qwen3-235B-A22B-Thinking-2507</div>
-            <div class="model-id">qwen3-235b-a22b-thinking-2507</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
- 
-          <div class="model-card qwen">
-            <div class="model-name">Qwen3-Coder-480B-A35B-Instruct</div>
-            <div class="model-id">qwen3-coder-480b-a35b-instruct</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge no">–</span>
-              </div>
-            </div>
-          </div>
- 
-          <div class="model-card qwen">
-            <div class="model-name">Qwen3-Coder-480B-A35B-Instruct-Turbo</div>
-            <div class="model-id">qwen3-coder-480b-a35b-instruct-turbo</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge no">–</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kimi -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-kimi">K</div>
-          <div class="family-name">Kimi (Moonshot AI)</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card kimi">
-            <div class="model-name">Kimi-K2-Instruct-0905</div>
-            <div class="model-id">moonshotai/kimi-k2-instruct-0905</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card kimi">
-            <div class="model-name">Kimi-K2-Thinking</div>
-            <div class="model-id">moonshotai/kimi-k2-thinking</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">256K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mistral / Devstral -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-mistral">M</div>
-          <div class="family-name">Mistral AI / Devstral</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card mistral">
-            <div class="model-name">devstral-2-123b-instruct-2512</div>
-            <div class="model-id">devstral-2-123b-instruct-2512</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">262K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-          <div class="model-card mistral">
-            <div class="model-name">mistral-large-3-675b-instruct-2512</div>
-            <div class="model-id">mistral-large-3-675b-instruct-2512</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">262K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge yes">✓</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Fonctions</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- GPT-OSS -->
-      <div class="family-section">
-        <div class="family-header">
-          <div class="family-logo logo-gpt-oss">OSS</div>
-          <div class="family-name">OpenAI GPT-OSS</div>
-        </div>
-        <div class="models-grid">
-          <div class="model-card gpt-oss">
-            <div class="model-name">GPT-OSS-120B</div>
-            <div class="model-id">gpt-oss-120b</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">128K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="model-card gpt-oss">
-            <div class="model-name">GPT-OSS-20B</div>
-            <div class="model-id">gpt-oss-20b</div>
-            <div class="capabilities">
-              <div class="capability">
-                <span class="capability-label">Contexte</span>
-                <span class="capability-value">128K</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Vision</span>
-                <span class="badge no">–</span>
-              </div>
-              <div class="capability">
-                <span class="capability-label">Réflexion</span>
-                <span class="badge yes">✓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </section>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <p class="footer-date">📅 Mis à jour le 17 décembre 2025</p>
-        <p class="footer-date">© 2025 ScioNos - Infrastructure GPU B200</p>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Core features</div>
+          <h2>Built for teams that need control over AI usage.</h2>
+          <p class="section-description">
+            Centralize access to multiple AI providers while keeping governance, observability, and cost control close to your infrastructure.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-number">01</span>
+            <h3>Unified API routing</h3>
+            <p>Expose compatible API routes and route requests across your configured providers with a single gateway endpoint.</p>
+            <div class="chips">
+              <span class="chip">OpenAI-compatible</span>
+              <span class="chip">Claude-compatible</span>
+              <span class="chip">Gemini-compatible</span>
+              <span class="chip">Custom channels</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">02</span>
+            <h3>Secure key management</h3>
+            <p>Create tokens, apply permissions, limit access, and keep provider credentials separated from end users.</p>
+            <div class="chips">
+              <span class="chip">Keys</span>
+              <span class="chip">Groups</span>
+              <span class="chip">Quotas</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">03</span>
+            <h3>Usage and cost visibility</h3>
+            <p>Track token usage, latency, request status, and spend from a single operational view.</p>
+            <div class="chips">
+              <span class="chip">Logs</span>
+              <span class="chip">Costs</span>
+              <span class="chip">Analytics</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">04</span>
+            <h3>Operational reliability</h3>
+            <p>Use routing policies, rate limits, and provider fallback patterns to keep applications responsive.</p>
+            <div class="chips">
+              <span class="chip">Rate limits</span>
+              <span class="chip">Fallback</span>
+              <span class="chip">Monitoring</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="mini-grid">
+          <article class="mini-card">
+            <div class="icon">↯</div>
+            <h3>Fast integration</h3>
+            <p>Connect existing tools with familiar API formats and minimal application changes.</p>
+          </article>
+          <article class="mini-card">
+            <div class="icon">$</div>
+            <h3>Transparent billing</h3>
+            <p>Understand where requests go, how much they cost, and who is consuming them.</p>
+          </article>
+          <article class="mini-card">
+            <div class="icon">◎</div>
+            <h3>Team ready</h3>
+            <p>Organize access for users, teams, projects, and different usage policies.</p>
+          </article>
+          <article class="mini-card">
+            <div class="icon">⌘</div>
+            <h3>Self-hosted</h3>
+            <p>Keep the gateway under your control and adapt it to your deployment model.</p>
+          </article>
+        </div>
       </div>
-    </div>
-  </footer>
+    </section>
+
+    <section class="section border-top">
+      <div class="container">
+        <div class="section-head" style="text-align:center;margin-inline:auto;">
+          <div class="section-kicker">How it works</div>
+          <h2>From provider keys to production traffic in three steps.</h2>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-icon">⚙<span class="step-index">1</span></div>
+            <h3>Configure</h3>
+            <p>Add providers, channels, tokens, user groups, quotas, and routing preferences in the console.</p>
+          </article>
+          <article class="step">
+            <div class="step-icon">↔<span class="step-index">2</span></div>
+            <h3>Connect</h3>
+            <p>Point your apps to the ScioNos endpoint and keep using compatible request formats.</p>
+          </article>
+          <article class="step">
+            <div class="step-icon">▣<span class="step-index">3</span></div>
+            <h3>Monitor</h3>
+            <p>Review logs, latency, token usage, costs, and request outcomes from one place.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="container">
+        <div class="final-card">
+          <div class="section-kicker">ScioNos</div>
+          <h2>Simple access for users. Full control for operators.</h2>
+          <p>
+            ScioNos keeps AI access clean, measurable, and manageable across teams and applications — without exposing the complexity of every upstream provider.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
