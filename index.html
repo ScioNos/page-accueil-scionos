@@ -314,9 +314,18 @@
       border-radius: 999px;
       background: rgba(245, 245, 245, 0.72);
       color: rgba(9, 9, 11, 0.62);
+      font: inherit;
       font-size: 11px;
       font-weight: 750;
       white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    }
+
+    .route-badge:hover {
+      transform: translateY(-1px);
+      border-color: rgba(48, 128, 255, 0.24);
+      color: var(--blue);
     }
 
     .route-badge.active {
@@ -712,7 +721,6 @@
         <div class="hero-actions">
           <a class="button signup" href="https://hubs02225.snia.ch/sign-up">Start with 2M free tokens <span aria-hidden="true">→</span></a>
           <a class="button primary" href="https://hubs02225.snia.ch/dashboardA">Open Console</a>
-          <a class="button secondary" href="https://docs.newapi.pro/" target="_blank" rel="noopener noreferrer">Read Documentation</a>
         </div>
 
         <div class="offer-card" aria-label="Free tokens offer">
@@ -731,41 +739,25 @@
             <span class="ok"><span class="status-dot"></span> Routed</span>
           </div>
           <div class="route-badges" aria-label="Supported API formats">
-            <span class="route-badge active">Chat Completions</span>
-            <span class="route-badge">Responses API</span>
-            <span class="route-badge">Claude Messages</span>
-            <span class="route-badge">Gemini GenerateContent</span>
+            <button class="route-badge active" type="button" data-api-route="chat" aria-pressed="true">Chat Completions</button>
+            <button class="route-badge" type="button" data-api-route="responses" aria-pressed="false">Responses API</button>
+            <button class="route-badge" type="button" data-api-route="claude" aria-pressed="false">Claude Messages</button>
+            <button class="route-badge" type="button" data-api-route="gemini" aria-pressed="false">Gemini GenerateContent</button>
           </div>
-          <div class="endpoint"><span class="method">POST</span><span>/v1/chat/completions</span></div>
+          <div class="endpoint"><span class="method">POST</span><span id="api-endpoint">/v1/chat/completions</span></div>
           <div class="code-grid">
             <div class="panel">
               <div class="panel-label">Request</div>
-              <pre><span class="green">curl</span> <span class="blue">-X POST</span> <span class="amber">"/v1/chat/completions"</span> \
-  <span class="blue">-H</span> <span class="amber">"Authorization: Bearer sk-••••"</span> \
-  <span class="blue">-d</span> '{
-    <span class="blue">"model"</span>: <span class="amber">"your-model"</span>,
-    <span class="blue">"messages"</span>: [
-      { <span class="blue">"role"</span>: <span class="amber">"user"</span>, <span class="blue">"content"</span>: <span class="amber">"..."</span> }
-    ]
-  }'</pre>
+              <pre id="api-request"></pre>
             </div>
             <div class="panel">
               <div class="panel-label">Response</div>
-              <pre>{
-  <span class="blue">"choices"</span>: [{
-    <span class="blue">"message"</span>: {
-      <span class="blue">"content"</span>: <span class="amber">"Chat request routed."</span>
-    }
-  }],
-  <span class="blue">"usage"</span>: {
-    <span class="blue">"total_tokens"</span>: <span class="violet">27</span>
-  }
-}</pre>
+              <pre id="api-response"></pre>
             </div>
           </div>
-          <div class="metrics">
-            <span>Chat · Responses · Claude · Gemini</span>
-            <span>compatible routes</span>
+          <div class="metrics" id="api-metrics">
+            <span>Chat Completions</span>
+            <span>27 tokens</span>
             <span>usage tracked</span>
             <span>cost controlled</span>
           </div>
@@ -905,5 +897,115 @@
       </div>
     </section>
   </main>
+  <script>
+    const apiExamples = {
+      chat: {
+        endpoint: "/v1/chat/completions",
+        request: `<span class="green">curl</span> <span class="blue">-X POST</span> <span class="amber">"/v1/chat/completions"</span> \\
+  <span class="blue">-H</span> <span class="amber">"Authorization: Bearer sk-••••"</span> \\
+  <span class="blue">-d</span> '{
+    <span class="blue">"model"</span>: <span class="amber">"your-model"</span>,
+    <span class="blue">"messages"</span>: [
+      { <span class="blue">"role"</span>: <span class="amber">"user"</span>, <span class="blue">"content"</span>: <span class="amber">"..."</span> }
+    ]
+  }'`,
+        response: `{
+  <span class="blue">"choices"</span>: [{
+    <span class="blue">"message"</span>: {
+      <span class="blue">"content"</span>: <span class="amber">"Chat request routed."</span>
+    }
+  }],
+  <span class="blue">"usage"</span>: { <span class="blue">"total_tokens"</span>: <span class="violet">27</span> }
+}`,
+        metrics: ["Chat Completions", "27 tokens", "usage tracked", "cost controlled"]
+      },
+      responses: {
+        endpoint: "/v1/responses",
+        request: `<span class="green">curl</span> <span class="blue">-X POST</span> <span class="amber">"/v1/responses"</span> \\
+  <span class="blue">-H</span> <span class="amber">"Authorization: Bearer sk-••••"</span> \\
+  <span class="blue">-d</span> '{
+    <span class="blue">"model"</span>: <span class="amber">"your-model"</span>,
+    <span class="blue">"input"</span>: <span class="amber">"..."</span>
+  }'`,
+        response: `{
+  <span class="blue">"output"</span>: [{
+    <span class="blue">"type"</span>: <span class="amber">"output_text"</span>,
+    <span class="blue">"text"</span>: <span class="amber">"Response workflow ready."</span>
+  }],
+  <span class="blue">"usage"</span>: { <span class="blue">"total_tokens"</span>: <span class="violet">31</span> }
+}`,
+        metrics: ["Responses API", "31 tokens", "workflow ready", "usage tracked"]
+      },
+      claude: {
+        endpoint: "/v1/messages",
+        request: `<span class="green">curl</span> <span class="blue">-X POST</span> <span class="amber">"/v1/messages"</span> \\
+  <span class="blue">-H</span> <span class="amber">"x-api-key: sk-••••"</span> \\
+  <span class="blue">-H</span> <span class="amber">"anthropic-version: 2023-06-01"</span> \\
+  <span class="blue">-d</span> '{
+    <span class="blue">"model"</span>: <span class="amber">"your-model"</span>,
+    <span class="blue">"max_tokens"</span>: <span class="violet">1024</span>,
+    <span class="blue">"messages"</span>: [
+      { <span class="blue">"role"</span>: <span class="amber">"user"</span>, <span class="blue">"content"</span>: <span class="amber">"..."</span> }
+    ]
+  }'`,
+        response: `{
+  <span class="blue">"content"</span>: [{
+    <span class="blue">"type"</span>: <span class="amber">"text"</span>,
+    <span class="blue">"text"</span>: <span class="amber">"Claude message routed."</span>
+  }],
+  <span class="blue">"usage"</span>: {
+    <span class="blue">"input_tokens"</span>: <span class="violet">11</span>,
+    <span class="blue">"output_tokens"</span>: <span class="violet">18</span>
+  }
+}`,
+        metrics: ["Claude Messages", "29 tokens", "Anthropic format", "routed"]
+      },
+      gemini: {
+        endpoint: "/v1beta/models/{model}:generateContent",
+        request: `<span class="green">curl</span> <span class="blue">-X POST</span> <span class="amber">"/v1beta/models/{model}:generateContent"</span> \\
+  <span class="blue">-H</span> <span class="amber">"x-goog-api-key: sk-••••"</span> \\
+  <span class="blue">-d</span> '{
+    <span class="blue">"contents"</span>: [
+      { <span class="blue">"role"</span>: <span class="amber">"user"</span>,
+        <span class="blue">"parts"</span>: [{ <span class="blue">"text"</span>: <span class="amber">"..."</span> }] }
+    ]
+  }'`,
+        response: `{
+  <span class="blue">"candidates"</span>: [{
+    <span class="blue">"content"</span>: {
+      <span class="blue">"parts"</span>: [{ <span class="blue">"text"</span>: <span class="amber">"Gemini request served."</span> }]
+    }
+  }],
+  <span class="blue">"usageMetadata"</span>: { <span class="blue">"totalTokenCount"</span>: <span class="violet">25</span> }
+}`,
+        metrics: ["Gemini GenerateContent", "25 tokens", "Google format", "served"]
+      }
+    };
+
+    const endpointEl = document.getElementById("api-endpoint");
+    const requestEl = document.getElementById("api-request");
+    const responseEl = document.getElementById("api-response");
+    const metricsEl = document.getElementById("api-metrics");
+    const routeButtons = document.querySelectorAll("[data-api-route]");
+
+    function setApiRoute(route) {
+      const example = apiExamples[route] || apiExamples.chat;
+      endpointEl.textContent = example.endpoint;
+      requestEl.innerHTML = example.request;
+      responseEl.innerHTML = example.response;
+      metricsEl.innerHTML = example.metrics.map(item => `<span>${item}</span>`).join("");
+      routeButtons.forEach(button => {
+        const active = button.dataset.apiRoute === route;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+    }
+
+    routeButtons.forEach(button => {
+      button.addEventListener("click", () => setApiRoute(button.dataset.apiRoute));
+    });
+
+    setApiRoute("chat");
+  </script>
 </body>
 </html>
