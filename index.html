@@ -180,6 +180,16 @@
       box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.75);
     }
 
+    .button.signup {
+      background: linear-gradient(90deg, var(--blue), var(--violet));
+      color: #fff;
+      box-shadow: 0 18px 36px -22px rgba(48, 128, 255, 0.85);
+    }
+
+    .button.signup:hover {
+      box-shadow: 0 22px 42px -24px rgba(141, 84, 255, 0.9);
+    }
+
     .button.secondary {
       background: rgba(255, 255, 255, 0.72);
       color: var(--foreground);
@@ -198,6 +208,56 @@
       font-size: 13px;
     }
 
+    .offer-card {
+      max-width: 760px;
+      margin: 28px auto 0;
+      padding: 24px;
+      border: 1px solid rgba(48, 128, 255, 0.18);
+      border-radius: 24px;
+      background:
+        radial-gradient(90% 120% at 0% 0%, rgba(48, 128, 255, 0.12), transparent 58%),
+        radial-gradient(80% 120% at 100% 0%, rgba(141, 84, 255, 0.12), transparent 58%),
+        rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-card);
+      text-align: left;
+      backdrop-filter: blur(18px);
+    }
+
+    .offer-badge {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .offer-card strong {
+      display: block;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+    }
+
+    .offer-card p {
+      max-width: 620px;
+      margin-top: 10px;
+      color: var(--muted-foreground);
+      font-size: 15px;
+    }
+
+    .offer-link {
+      display: inline-flex;
+      margin-top: 18px;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
     .showcase {
       margin: 46px auto 0;
       max-width: 760px;
@@ -210,26 +270,30 @@
       backdrop-filter: blur(18px);
     }
 
-    .tabs {
+    .demo-head {
       display: flex;
       align-items: center;
-      gap: 2px;
-      padding: 0 14px;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--border);
-      min-height: 46px;
+      min-height: 58px;
+      background: rgba(250, 250, 250, 0.66);
     }
 
-    .tab {
-      padding: 14px 12px 12px;
+    .demo-head strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 13px;
+      letter-spacing: -0.01em;
+    }
+
+    .demo-label {
       color: rgba(9, 9, 11, 0.42);
-      font-size: 12px;
-      font-weight: 650;
-      border-bottom: 2px solid transparent;
-    }
-
-    .tab.active {
-      color: var(--blue);
-      border-bottom-color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
 
     .ok {
@@ -593,8 +657,9 @@
         width: 100%;
       }
 
-      .tabs {
-        overflow-x: auto;
+      .demo-head {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .feature-card,
@@ -616,16 +681,24 @@
           ScioNos brings your AI providers, API keys, quotas, routing rules, logs, and usage analytics into a single secure control plane powered by new-api.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="/dashboard">Open Console <span aria-hidden="true">→</span></a>
+          <a class="button signup" href="https://hubs02225.snia.ch/sign-up">Start with 2M free tokens <span aria-hidden="true">→</span></a>
+          <a class="button primary" href="https://hubs02225.snia.ch/dashboardA">Open Console</a>
           <a class="button secondary" href="https://docs.newapi.pro/" target="_blank" rel="noopener noreferrer">Read Documentation</a>
         </div>
 
-        <div class="showcase" aria-label="API gateway example">
-          <div class="tabs">
-            <span class="tab">Chat</span>
-            <span class="tab">Responses</span>
-            <span class="tab active">Messages</span>
-            <span class="tab">Embeddings</span>
+        <div class="offer-card" aria-label="Free tokens offer">
+          <div class="offer-badge">Limited welcome credit</div>
+          <strong>Get 2 million free tokens</strong>
+          <p>Create your account and start testing ScioNos with a selected range of open-source models included in the free welcome credit.</p>
+          <a class="offer-link" href="https://hubs02225.snia.ch/sign-up">Create your free account <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="showcase" aria-label="Static API gateway example">
+          <div class="demo-head">
+            <div>
+              <span class="demo-label">API example</span>
+              <strong>Unified message route</strong>
+            </div>
             <span class="ok"><span class="status-dot"></span> 200 OK</span>
           </div>
           <div class="endpoint"><span class="method">POST</span><span>/v1/messages</span></div>
@@ -750,9 +823,9 @@
             <p>Organize access for users, teams, projects, and different usage policies.</p>
           </article>
           <article class="mini-card">
-            <div class="icon">⌘</div>
-            <h3>Self-hosted</h3>
-            <p>Keep the gateway under your control and adapt it to your deployment model.</p>
+            <div class="icon">2M</div>
+            <h3>Free starter credit</h3>
+            <p>New accounts receive 2 million free tokens on a selected range of open-source models.</p>
           </article>
         </div>
       </div>
