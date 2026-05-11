@@ -296,6 +296,35 @@
       text-transform: uppercase;
     }
 
+    .route-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .route-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(245, 245, 245, 0.72);
+      color: rgba(9, 9, 11, 0.62);
+      font-size: 11px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .route-badge.active {
+      border-color: rgba(48, 128, 255, 0.22);
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
     .ok {
       margin-left: auto;
       display: inline-flex;
@@ -696,43 +725,49 @@
         <div class="showcase" aria-label="Static API gateway example">
           <div class="demo-head">
             <div>
-              <span class="demo-label">API example</span>
-              <strong>Unified message route</strong>
+              <span class="demo-label">Compatible API routes</span>
+              <strong>One gateway, familiar request formats</strong>
             </div>
-            <span class="ok"><span class="status-dot"></span> 200 OK</span>
+            <span class="ok"><span class="status-dot"></span> Routed</span>
           </div>
-          <div class="endpoint"><span class="method">POST</span><span>/v1/messages</span></div>
+          <div class="route-badges" aria-label="Supported API formats">
+            <span class="route-badge active">Chat Completions</span>
+            <span class="route-badge">Responses API</span>
+            <span class="route-badge">Claude Messages</span>
+            <span class="route-badge">Gemini GenerateContent</span>
+          </div>
+          <div class="endpoint"><span class="method">POST</span><span>/v1/chat/completions</span></div>
           <div class="code-grid">
             <div class="panel">
               <div class="panel-label">Request</div>
-              <pre><span class="green">curl</span> <span class="blue">-X POST</span> <span class="amber">"/v1/messages"</span> \
+              <pre><span class="green">curl</span> <span class="blue">-X POST</span> <span class="amber">"/v1/chat/completions"</span> \
   <span class="blue">-H</span> <span class="amber">"Authorization: Bearer sk-••••"</span> \
-  <span class="blue">-H</span> <span class="amber">"Content-Type: application/json"</span> \
   <span class="blue">-d</span> '{
     <span class="blue">"model"</span>: <span class="amber">"your-model"</span>,
     <span class="blue">"messages"</span>: [
-      { <span class="blue">"role"</span>: <span class="amber">"user"</span>, <span class="blue">"content"</span>: <span class="amber">"Hello"</span> }
+      { <span class="blue">"role"</span>: <span class="amber">"user"</span>, <span class="blue">"content"</span>: <span class="amber">"..."</span> }
     ]
   }'</pre>
             </div>
             <div class="panel">
               <div class="panel-label">Response</div>
               <pre>{
-  <span class="blue">"status"</span>: <span class="amber">"routed"</span>,
-  <span class="blue">"provider"</span>: <span class="amber">"auto"</span>,
-  <span class="blue">"latency_ms"</span>: <span class="violet">156</span>,
+  <span class="blue">"choices"</span>: [{
+    <span class="blue">"message"</span>: {
+      <span class="blue">"content"</span>: <span class="amber">"Chat request routed."</span>
+    }
+  }],
   <span class="blue">"usage"</span>: {
-    <span class="blue">"tokens"</span>: <span class="violet">29</span>,
-    <span class="blue">"cost"</span>: <span class="amber">"$0.00087"</span>
+    <span class="blue">"total_tokens"</span>: <span class="violet">27</span>
   }
 }</pre>
             </div>
           </div>
           <div class="metrics">
-            <span>156 ms latency</span>
-            <span>29 tokens</span>
-            <span>stream · sse</span>
-            <span>cost tracked</span>
+            <span>Chat · Responses · Claude · Gemini</span>
+            <span>compatible routes</span>
+            <span>usage tracked</span>
+            <span>cost controlled</span>
           </div>
         </div>
       </div>
