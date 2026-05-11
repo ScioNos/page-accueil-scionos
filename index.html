@@ -258,6 +258,53 @@
       font-weight: 800;
     }
 
+    .logo-cloud {
+      max-width: 760px;
+      margin: 34px auto 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .logo-tile {
+      position: relative;
+      min-height: 78px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 16px 42px -36px rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+    }
+
+    .logo-tile::after {
+      content: "";
+      position: absolute;
+      inset: auto 12% -36% 12%;
+      height: 48px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(48, 128, 255, 0.12), transparent 65%);
+      pointer-events: none;
+    }
+
+    .logo-tile img {
+      position: relative;
+      z-index: 1;
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+
+    .logo-caption {
+      max-width: 760px;
+      margin: 14px auto 0;
+      color: var(--muted-foreground);
+      font-size: 13px;
+      text-align: center;
+    }
+
     .showcase {
       margin: 46px auto 0;
       max-width: 760px;
@@ -567,20 +614,7 @@
       font-weight: 650;
     }
 
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-top: 18px;
-    }
 
-    .mini-card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: #fff;
-      padding: 22px;
-      box-shadow: 0 16px 42px -36px rgba(15, 23, 42, 0.32);
-    }
 
     .icon {
       width: 42px;
@@ -666,10 +700,13 @@
     @media (max-width: 900px) {
       .code-grid,
       .feature-grid,
-      .mini-grid,
       .steps,
       .stats {
         grid-template-columns: 1fr;
+      }
+
+      .logo-cloud {
+        grid-template-columns: repeat(3, 1fr);
       }
 
       .panel + .panel {
@@ -695,13 +732,16 @@
         width: 100%;
       }
 
+      .logo-cloud {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .demo-head {
         align-items: flex-start;
         flex-direction: column;
       }
 
       .feature-card,
-      .mini-card,
       .step,
       .final-card {
         padding: 22px;
@@ -714,19 +754,29 @@
     <section class="hero">
       <div class="container">
         <div class="eyebrow"><span class="status-dot"></span> Self-hosted AI infrastructure</div>
-        <h1>One gateway for <span class="gradient-text">all your AI traffic</span></h1>
+        <h1>AI access, <span class="gradient-text">made simple</span></h1>
         <p class="hero-text">
-          ScioNos brings your AI providers, API keys, quotas, routing rules, logs, and usage analytics into a single secure control plane powered by new-api.
+          One clean gateway for models, keys, quotas and usage tracking.
         </p>
         <div class="hero-actions">
           <a class="button signup" href="https://hubs02225.snia.ch/sign-up">Start with 2M free tokens <span aria-hidden="true">→</span></a>
           <a class="button primary" href="https://hubs02225.snia.ch/dashboardA">Open Console</a>
         </div>
 
+        <div class="logo-cloud" aria-label="AI ecosystem logos">
+          <div class="logo-tile"><img src="assets/openai.svg" alt="OpenAI" /></div>
+          <div class="logo-tile"><img src="assets/claude-color.svg" alt="Claude" /></div>
+          <div class="logo-tile"><img src="assets/gemini-color.svg" alt="Gemini" /></div>
+          <div class="logo-tile"><img src="assets/qwen-color.svg" alt="Qwen" /></div>
+          <div class="logo-tile"><img src="assets/gemma-color.svg" alt="Gemma" /></div>
+          <div class="logo-tile"><img src="assets/zhipu-color.svg" alt="Zhipu" /></div>
+        </div>
+        <p class="logo-caption">Connect familiar AI formats through one ScioNos endpoint.</p>
+
         <div class="offer-card" aria-label="Free tokens offer">
-          <div class="offer-badge">Limited welcome credit</div>
-          <strong>Get 2 million free tokens</strong>
-          <p>Create your account and start testing ScioNos with a selected range of open-source models included in the free welcome credit.</p>
+          <div class="offer-badge">Welcome credit</div>
+          <strong>2 million free tokens</strong>
+          <p>Test selected open-source models in minutes.</p>
           <a class="offer-link" href="https://hubs02225.snia.ch/sign-up">Create your free account <span aria-hidden="true">→</span></a>
         </div>
 
@@ -768,10 +818,10 @@
     <section class="section border-top">
       <div class="container">
         <div class="stats" aria-label="Platform highlights">
-          <div class="stat"><strong>50+</strong><span>upstream services</span></div>
-          <div class="stat"><strong>100+</strong><span>billing profiles</span></div>
-          <div class="stat"><strong>50+</strong><span>compatible routes</span></div>
-          <div class="stat"><strong>10+</strong><span>control modules</span></div>
+          <div class="stat"><strong>50+</strong><span>providers</span></div>
+          <div class="stat"><strong>100+</strong><span>billing rules</span></div>
+          <div class="stat"><strong>50+</strong><span>routes</span></div>
+          <div class="stat"><strong>10+</strong><span>controls</span></div>
         </div>
       </div>
     </section>
@@ -780,17 +830,15 @@
       <div class="container">
         <div class="section-head">
           <div class="section-kicker">Core features</div>
-          <h2>Built for teams that need control over AI usage.</h2>
-          <p class="section-description">
-            Centralize access to multiple AI providers while keeping governance, observability, and cost control close to your infrastructure.
-          </p>
+          <h2>Less friction. More control.</h2>
+          <p class="section-description">Everything operators need, without exposing provider complexity.</p>
         </div>
 
         <div class="feature-grid">
           <article class="feature-card">
             <span class="feature-number">01</span>
             <h3>Unified API routing</h3>
-            <p>Expose compatible API routes and route requests across your configured providers with a single gateway endpoint.</p>
+            <p>Route every app through one endpoint.</p>
             <div class="chips">
               <span class="chip">OpenAI-compatible</span>
               <span class="chip">Claude-compatible</span>
@@ -802,7 +850,7 @@
           <article class="feature-card">
             <span class="feature-number">02</span>
             <h3>Secure key management</h3>
-            <p>Create tokens, apply permissions, limit access, and keep provider credentials separated from end users.</p>
+            <p>Issue keys without exposing provider credentials.</p>
             <div class="chips">
               <span class="chip">Keys</span>
               <span class="chip">Groups</span>
@@ -813,7 +861,7 @@
           <article class="feature-card">
             <span class="feature-number">03</span>
             <h3>Usage and cost visibility</h3>
-            <p>Track token usage, latency, request status, and spend from a single operational view.</p>
+            <p>See usage, latency and spend at a glance.</p>
             <div class="chips">
               <span class="chip">Logs</span>
               <span class="chip">Costs</span>
@@ -824,35 +872,12 @@
           <article class="feature-card">
             <span class="feature-number">04</span>
             <h3>Operational reliability</h3>
-            <p>Use routing policies, rate limits, and provider fallback patterns to keep applications responsive.</p>
+            <p>Keep traffic stable with limits and fallback.</p>
             <div class="chips">
               <span class="chip">Rate limits</span>
               <span class="chip">Fallback</span>
               <span class="chip">Monitoring</span>
             </div>
-          </article>
-        </div>
-
-        <div class="mini-grid">
-          <article class="mini-card">
-            <div class="icon">↯</div>
-            <h3>Fast integration</h3>
-            <p>Connect existing tools with familiar API formats and minimal application changes.</p>
-          </article>
-          <article class="mini-card">
-            <div class="icon">$</div>
-            <h3>Transparent billing</h3>
-            <p>Understand where requests go, how much they cost, and who is consuming them.</p>
-          </article>
-          <article class="mini-card">
-            <div class="icon">◎</div>
-            <h3>Team ready</h3>
-            <p>Organize access for users, teams, projects, and different usage policies.</p>
-          </article>
-          <article class="mini-card">
-            <div class="icon">2M</div>
-            <h3>Free starter credit</h3>
-            <p>New accounts receive 2 million free tokens on a selected range of open-source models.</p>
           </article>
         </div>
       </div>
@@ -862,24 +887,24 @@
       <div class="container">
         <div class="section-head" style="text-align:center;margin-inline:auto;">
           <div class="section-kicker">How it works</div>
-          <h2>From provider keys to production traffic in three steps.</h2>
+          <h2>Three steps. One gateway.</h2>
         </div>
 
         <div class="steps">
           <article class="step">
             <div class="step-icon">⚙<span class="step-index">1</span></div>
             <h3>Configure</h3>
-            <p>Add providers, channels, tokens, user groups, quotas, and routing preferences in the console.</p>
+            <p>Add providers, keys and quotas.</p>
           </article>
           <article class="step">
             <div class="step-icon">↔<span class="step-index">2</span></div>
             <h3>Connect</h3>
-            <p>Point your apps to the ScioNos endpoint and keep using compatible request formats.</p>
+            <p>Use familiar API formats.</p>
           </article>
           <article class="step">
             <div class="step-icon">▣<span class="step-index">3</span></div>
             <h3>Monitor</h3>
-            <p>Review logs, latency, token usage, costs, and request outcomes from one place.</p>
+            <p>Watch usage, cost and latency.</p>
           </article>
         </div>
       </div>
@@ -889,9 +914,9 @@
       <div class="container">
         <div class="final-card">
           <div class="section-kicker">ScioNos</div>
-          <h2>Simple access for users. Full control for operators.</h2>
+          <h2>Ready when you are.</h2>
           <p>
-            ScioNos keeps AI access clean, measurable, and manageable across teams and applications — without exposing the complexity of every upstream provider.
+            Start free, route smarter, scale when needed.
           </p>
         </div>
       </div>
